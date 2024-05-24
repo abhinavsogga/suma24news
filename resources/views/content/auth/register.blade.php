@@ -1,6 +1,6 @@
 @extends('layouts/blankLayout')
 
-@section('title', 'Register Basic - Pages')
+@section('title', 'Register')
 
 @section('page-style')
 <!-- Page -->
@@ -9,65 +9,61 @@
 
 
 @section('content')
-<div class="container-xxl">
-  <div class="authentication-wrapper authentication-basic container-p-y">
-    <div class="authentication-inner">
-      <!-- Register Card -->
-      <div class="card">
-        <div class="card-body">
-          <!-- Logo -->
-          <div class="app-brand justify-content-center">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
-              <span class="app-brand-logo demo">@include('_partials.macros',["width"=>25,"withbg"=>'var(--bs-primary)'])</span>
-              <span class="app-brand-text demo text-body fw-bold">{{config('variables.templateName')}}</span>
-            </a>
-          </div>
-          <!-- /Logo -->
-          <h4 class="mb-2">Adventure starts here 🚀</h4>
-          <p class="mb-4">Make your app management easy and fun!</p>
-
-          <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" autofocus>
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
-            </div>
-            <div class="mb-3 form-password-toggle">
-              <label class="form-label" for="password">Password</label>
-              <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms">
-                <label class="form-check-label" for="terms-conditions">
-                  I agree to
-                  <a href="javascript:void(0);">privacy policy & terms</a>
-                </label>
-              </div>
-            </div>
-            <button class="btn btn-primary d-grid w-100">
-              Sign up
-            </button>
-          </form>
-
-          <p class="text-center">
-            <span>Already have an account?</span>
-            <a href="{{url('auth/login')}}">
-              <span>Sign in instead</span>
-            </a>
-          </p>
-        </div>
-      </div>
-      <!-- Register Card -->
-    </div>
-  </div>
-</div>
+<section class="container d-flex flex-column">
+		<div class="row align-items-center justify-content-center g-0 min-vh-100">
+			<div class="col-lg-5 col-md-8 py-8 py-xl-0">
+				<!-- Card -->
+				<div class="card shadow">
+					<!-- Card body -->
+					<div class="card-body p-6">
+						<div class="mb-4">
+							<a href="../index.html"><img src="../assets/images/brand/logo/logo-icon.svg" class="mb-4" alt=""></a>
+							<h1 class="mb-1 fw-bold">Sign up</h1>
+							<span>Already have an account?
+								<a href="{{route('login')}}" class="ms-1">Sign in</a></span>
+						</div>
+						<!-- Form -->
+						<form action="{{route('register')}}" method="POST">
+              @csrf
+								<!-- Username -->
+							<div class="mb-3">
+								<label for="name" class="form-label">Name</label>
+								<input type="text" id="name" class="form-control" name="name" placeholder="Name"
+									required>
+							</div>
+								<!-- Email -->
+							<div class="mb-3">
+								<label for="email" class="form-label">Email</label>
+								<input type="email" id="email" class="form-control" name="email" placeholder="Email address here"
+									required>
+							</div>
+								<!-- Password -->
+							<div class="mb-3">
+								<label for="password" class="form-label">Password</label>
+								<input type="password" id="password" class="form-control" name="password" placeholder="**************"
+									required>
+							</div>
+								<!-- Checkbox -->
+							<div class="mb-3">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="agreeCheck">
+									<label class="form-check-label" for="agreeCheck"><span>I agree to the <a href="terms-condition-page.html">Terms of
+												Service </a>and
+											<a href="terms-condition-page.html">Privacy Policy.</a></span></label>
+								</div>
+							</div>
+							<div>
+									<!-- Button -->
+									<div class="d-grid">
+								<button type="submit" class="btn btn-primary">
+									Create Free Account
+								</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 @endsection

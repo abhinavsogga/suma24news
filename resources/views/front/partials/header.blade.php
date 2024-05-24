@@ -64,13 +64,18 @@
                     <li><a class="dropdown-item" href="#">Turkish</a></li>
                   </ul>
                 </div>
-                <div class="d-flex btn_group">
-                  <button class="btn btn-md btn-outline-secondary">Login</button>
-                  <button class="btn btn-md btn-yellow">SIGN UP</button>
-                </div>
+                @if (Auth::check())
+                  <div class="d-flex btn_group">
+                    <a href="{{ route('logout') }}" class="btn btn-md btn-yellow">Logout</a>
+                  </div>
+                @else
+                  <div class="d-flex btn_group">
+                    <a href="{{ route('login') }}" class="btn btn-md btn-outline-secondary">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-md btn-yellow">SIGN UP</a>
+                  </div>
+                @endif
               </div>
             </div>
-
           </div>
         </div>
       </div>

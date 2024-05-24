@@ -36,7 +36,12 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('admin');
+            // Check if the user is an admin
+            if (Auth::user()->hasRole('admin')) {
+                return redirect()->intended('admin/dashboard');
+            } else {
+                return redirect()->intended('/');
+            }
         }
 
         // If the authentication fails, redirect back with an error message
@@ -52,6 +57,6 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/admin');
+        return redirect()->route('login');
     }
 }
