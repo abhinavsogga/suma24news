@@ -18,6 +18,7 @@
 
     <!-- Include Styles -->
     @include('layouts/sections/styles')
+    @yield('page-styles')
 
     <!-- Include Scripts for customizer, helper, analytics, config -->
     @include('layouts/sections/scriptsIncludes')
@@ -343,5 +344,6 @@
     </div>
     <!-- Scripts -->
     @include('layouts/sections/scripts')
+    @yield('page-scripts')
     </body>
 </html>

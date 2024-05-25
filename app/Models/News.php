@@ -23,6 +23,7 @@ class News extends Model
         'user_id',
         'image',
         'is_breaking',
+        'is_featured',
         'tags',
         'status',
     ];
@@ -34,6 +35,7 @@ class News extends Model
      */
     protected $casts = [
         'is_breaking' => 'boolean',
+        'is_featured' => 'boolean',
         'tags' => 'json',
     ];
 
@@ -84,7 +86,10 @@ class News extends Model
 
     public function getFeaturedNews(int $limit = 3)
     {
-        return self::inRandomOrder()->take(3)->get();
+        return self::where('is_featured', 1)
+            ->latest()
+            ->take($limit)
+            ->get();
     }
 
     public function getLatestByCategory(string $slug, int $limit = 4)
@@ -95,5 +100,20 @@ class News extends Model
         ->latest()
         ->take($limit)
         ->get();
+    }
+    
+
+    /**
+     * Boot the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->slug = Str::slug($model->title);
+        });
     }
 }

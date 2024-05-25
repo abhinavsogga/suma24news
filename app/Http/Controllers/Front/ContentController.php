@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 
 use App\Models\Category;
+use App\Models\News;
 use App\Models\Page;
 
 class ContentController extends Controller
@@ -22,9 +23,13 @@ class ContentController extends Controller
         ]);
     }
 
-	public function showNewsDetails()
+	public function showNewsDetails($slug)
 	{
+        $news = News::where('slug', $slug)->firstOrFail();
 
+		return view('front.news', [
+            'news' => $news,
+        ]);
 	}
 
 	public function showPage($page) {

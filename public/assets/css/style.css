@@ -167,7 +167,7 @@ input, img {outline: 0;}
 .title_h2 {font-family: 'Gilroy', sans-serif; font-weight: 700; color: var(--text-color); margin-bottom: 14px; }
 
 /* Slick */
-.slick-arrow { background-color: var(--blue-color-700); width: 44px; height: 44px; display: flex; justify-content: center; align-items: center; position: absolute; top: calc(50% - 44px/2); border: 0; border-radius: 50%; text-align: center; background-image: url(../images/icons/arrow-yellow-left.svg); background-repeat: no-repeat; background-position: center; font-size: 0; z-index: 1;}
+.slick-arrow { background-color: var(--blue-color-700); width: 44px; height: 44px; display: flex; justify-content: center; align-items: center; position: absolute; top: calc(50% - 44px/2); border: 0; border-radius: 50%; text-align: center; background-image: url(../img/icons/arrow-yellow-left.svg); background-repeat: no-repeat; background-position: center; font-size: 0; z-index: 1;}
 .slick-prev {left: calc(-44px/2);}
 .slick-next {transform: rotate(180deg); right: calc(-44px/2);}
 
@@ -276,7 +276,7 @@ input, img {outline: 0;}
 .bg_blue .slick-dots li.slick-active button {background-color: var(--yellow-color-700);}
 
 /* Photo Gallery */
-.gallery_sec .slider-for .photo-items img {height: auto;}
+.gallery_sec .slider-for .photo-items img {height: 420px; object-fit: cover;}
 .gallery_sec .slider-nav .slick-slide {display: flex; margin: 0 -15px;}
 .gallery_sec .slider-nav .photo-items {padding: 0 15px;}
 .gallery_sec .slider-nav .photo-items img { height: auto;}
@@ -285,3 +285,15 @@ input, img {outline: 0;}
 .gallery_sec .slider-nav .slick-arrow.slick-next { right: calc(-30px/2); }
 
 .play_icon {position: absolute; border: 0; background-color: transparent; top: calc(50% - 32px/2); left: calc(50% - 32px/2); border: 0; z-index: 1;}
+
+/* single-news */
+.news_content p{font-size: 1.1rem;}
+.object-fit-cover{object-fit: cover;}
+.like-deslike{
+     cursor: pointer;
+    span{ color: #7a7777;}
+    } 
+.sidebar_image img{padding: 0 60px;}
+@media (max-width:767px) { 
+    .sidebar_image img {display: none;}
+}

@@ -3,10 +3,11 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasRoles;
+    use HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.

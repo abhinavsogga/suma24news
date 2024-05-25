@@ -29,6 +29,7 @@ class StoreNewsRequest extends FormRequest
             'description' => 'required',
             'category_id' => 'required|exists:categories,id',
             'is_breaking' => 'in:0,1',
+            'is_featured' => 'in:0,1',
             'tags' => 'nullable',
             'status' => 'required|in:published,draft,archived',
         ];

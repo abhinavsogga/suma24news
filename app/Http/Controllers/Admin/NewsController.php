@@ -12,6 +12,8 @@ use App\Http\Requests\StoreNewsRequest;
 
 use Illuminate\Support\Facades\Storage;
 
+use App\Events\NewsCreated;
+
 class NewsController extends Controller
 {
     /**
@@ -57,6 +59,7 @@ class NewsController extends Controller
         $validatedData['user_id'] = auth()->id();
 
         $news = News::create($validatedData);
+        event(new Newscreated());
 
         return redirect()->route('news.index')
             ->with('success', 'News created successfully.');
@@ -100,6 +103,10 @@ class NewsController extends Controller
             $imagePath = $request->file('image')->store('news_images', 'public');
             $validatedData['image'] = $imagePath;
         }
+
+        // Ensure is_breaking and is_featured are set to 0 if not provided
+        $validatedData['is_breaking'] = $request->has('is_breaking') ? $validatedData['is_breaking'] : 0;
+        $validatedData['is_featured'] = $request->has('is_featured') ? $validatedData['is_featured'] : 0;
 
         // Update the news item
         $news->update($validatedData);

@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" re="preload">
+  <link rel="stylesheet" href="{{ asset('assets/libs/magnific-popup/magnific-popup.css') }}">
 </head>
 
 <body>

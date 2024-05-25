@@ -8,7 +8,9 @@
                 <figure class="mb-4">
                     <img src="{{ asset('/storage/' . $news->image) }}" alt="News" height="260" class="w-100 object-fit-cover" /></figure>
                 <div class="text-center news_content">
-                    <h3 class="h4 position-relative">{{ $news->title }}</h3>
+                    <h3 class="h4 position-relative">
+                        <a href="{{ route('content.newsDetails', $news->slug) }}">{{ $news->title }}</a>
+                    </h3>
                     <p>{{ $news->excerpt }}</p>
                 </div>
                 </div>

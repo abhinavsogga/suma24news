@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PageVisit extends Model
+class UserVisit extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,8 @@ class PageVisit extends Model
      */
     protected $fillable = [
         'user_id',
-        'page_url',
-        'visit_time',
-        'ip_address',
+        'url',
+        'time_spent',
+        'visited_at',
     ];
 }

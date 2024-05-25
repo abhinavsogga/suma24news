@@ -20,15 +20,6 @@ class Page extends Model
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'status' => 'boolean',
-    ];
-
-    /**
      * Boot the model.
      *
      * @return void
@@ -40,5 +31,20 @@ class Page extends Model
         static::creating(function ($model) {
             $model->slug = Str::slug($model->title);
         });
+    }
+
+    public function getExcerptAttribute()
+    {
+        return $this->getExcerptByLength($this->description, 50);
+    }
+
+    public function getLongExcerptAttribute()
+    {
+        return $this->getExcerptByLength($this->description, 200);
+    }
+
+    protected function getExcerptByLength(string $text, int $length)
+    {
+        return Str::limit($text, $length, '...');
     }
 }

@@ -1,5 +1,10 @@
 @extends('layouts/commonMaster')
 @section('title', 'News')
+
+@section('page-styles')
+<link href="{{ asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
 <section class="container-fluid p-4">
@@ -33,30 +38,9 @@
           <div class="col-lg-12 col-md-12 col-12">
             <!-- Card -->
             <div class="card rounded-3">
-              <!-- Card Header -->
-              <div class="card-header border-bottom-0 p-0">
-                <ul class="nav nav-lb-tab" id="tab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="all-tab" data-bs-toggle="pill" href="#all" role="tab"
-                      aria-controls="all" aria-selected="true">All</a>
-                  </li>
-                </ul>
-              </div>
-              <!--<div class="p-4 row">
-                <form class="d-flex align-items-center col-12 col-md-8 col-lg-3">
-                  <span class="position-absolute ps-3 search-icon">
-                    <i class="fe fe-search"></i>
-                  </span>
-                  <input type="search" class="form-control ps-6" placeholder="Filter Products" >
-                </form>
-              </div> -->
-              <div>
-                <div class="tab-content" id="tabContent">
-                  <!-- Tab -->
-                  <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                    <div class="table-responsive border-0">
+            <div class="table-responsive border-0">
                       <!-- Table -->
-                      <table class="table mb-0 text-nowrap table-hover table-centered table-with-checkbox">
+                      <table id="dataTableBasic" class="table mb-0 text-nowrap table-hover table-centered table-with-checkbox">
                         <!-- Table Head -->
                         <thead class="table-light">
                           <tr>
@@ -134,36 +118,17 @@
                         </tbody>
                       </table>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Card Footer -->
-              <!-- <div class="card-footer d-md-flex justify-content-between align-items-center">
-                <div>
-                  <span>Showing news 1 to 9 of 12</span>
-                </div>
-                <nav aria-label="Page navigation example">
-                  <ul class="pagination  mb-0">
-                    <li class="page-item disabled">
-                      <a class="page-link mx-1 rounded" href="#"><i class="mdi mdi-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link mx-1 rounded" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link mx-1 rounded" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link mx-1 rounded" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link mx-1 rounded" href="#"><i class="mdi mdi-chevron-right"></i></a>
-                    </li>
-                  </ul>
-                </nav>
-              </div> -->
+              
+              
             </div>
           </div>
         </div>
       </section>
+@endsection
+
+@section('page-scripts')
+<script src="{{ asset('assets/libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('assets/libs/datatables.net-responsive/js/responsive.bootstrap5.min.js') }}"></script>
 @endsection

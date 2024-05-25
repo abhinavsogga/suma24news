@@ -15,8 +15,8 @@
                     <span data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{$breaking->category->title}}
                     </span>
                     <h2 class="h2" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{$breaking->title}}</h2>
-                    <button data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms"
-                      class="btn btn-md btn-yellow">Read More</button>
+                    <a href="{{ route('content.newsDetails', $breaking->slug) }}" data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms"
+                      class="btn btn-md btn-yellow">Read More</a>
                   </div>
                 </div>
               </div>
@@ -28,12 +28,15 @@
             <div class="live_news">
               <h2 class="h5">Live News</h2>
               <div class="news-video">
-                <div class="position-relative video_block">
-                  <img src="{{ asset('assets/img/video-poster.jpg') }}" alt="Poster" width="300" height="300" class="w-100">
-                  <button class="play_btn"><img src="{{ asset('assets/img/icons/play_icon.svg') }}" alt="Play" width="66"
+                <div id="poster-container" class="position-relative video_block">
+                  <img src="{{ Storage::url($liveStreamingSettings['poster']) }}" alt="Poster" width="300" height="300" class="w-100">
+                  <button id="play-button" class="play_btn"><img src="{{ asset('assets/img/icons/play_icon.svg') }}" alt="Play" width="66"
                       height="66"></button>
                 </div>
-                <h3 class="h4">Former world champion delivers devastating blow, brutally knocking out UFC star</h3>
+                <div id="iframe-container">
+                  <iframe id="live-stream" src="{{ $liveStreamingSettings['url'] ?? '' }}" allowfullscreen></iframe>
+              </div>
+                <h3 class="h4">{{ $liveStreamingSettings['title'] ?? '' }}</h3>
               </div>
             </div>
           </div>
@@ -54,7 +57,7 @@
                       alt="News" height="300" class="w-100 object-fit-cover"/></figure>
                   <div class="col-md-6 mb-3 mb-md-0">
                     <div class="news_summary">
-                      <h3 class="h2">{{ $featured->title }}</h3>
+                      <h3 class="h2"><a href="{{ route('content.newsDetails', $featured->slug) }}">{{ $featured->title }}</a></h3>
                       <p>{{ $featured->long_excerpt }}</p>
                       <span class="post-by">By {{$featured->user->name}}</span>
                     </div>
@@ -77,7 +80,7 @@
                   <figure><img src="{{ asset('/storage/' . $latest->image) }}" alt="News" width="127"/>
                   </figure>
                   <div class="news_summary">
-                    <h3 class="h6">{{$latest->title}}</h3>
+                    <h3 class="h6"><a href="{{ route('content.newsDetails', $latest->slug) }}">{{$latest->title}}</a></h3>
                   </div>
                 </li>
               @endforeach
@@ -100,7 +103,7 @@
               <div class="mb-2">
                 <figure class="mb-4"><img src="{{ asset('/storage/' . $education->image) }}" alt="Education" height="220" class="w-100 object-fit-cover"/></figure>
                 <div class="text-center news_content">
-                  <h3 class="h4 position-relative">{{ $education->title }}</h3>
+                  <h3 class="h4 position-relative"><a href="{{ route('content.newsDetails', $education->slug) }}">{{ $education->title }}</a></h3>
                   <p>{{ $education->excerpt }}</p>
                 </div>
               </div>
@@ -123,7 +126,7 @@
                             <figure class="col-md-6 mb-3 mb-md-0"><img src="{{ asset('/storage/' . $politicsNews[0]->image) }}" alt="News" height="400px" class="w-100 object-fit-cover"></figure>
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <div class="news_summary">
-                                    <h3 class="h2">{{ $politicsNews[0]->title }}</h3>
+                                    <h3 class="h2"><a href="{{ route('content.newsDetails', $politicsNews[0]->slug) }}">{{ $politicsNews[0]->title }}</a></h3>
                                     <p>{{ $politicsNews[0]->excerpt }}</p>
                                 </div>
                             </div>
@@ -138,7 +141,7 @@
                         <li class="d-flex align-items-center border-0">
                             <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127" ></figure>
                             <div class="news_summary">
-                                <h3 class="h6">{{ $politics->title }}</h3>
+                                <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
                             </div>
                         </li>
                         @endforeach
@@ -151,7 +154,7 @@
                         <li class="d-flex align-items-center border-0">
                             <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127"></figure>
                             <div class="news_summary">
-                                <h3 class="h6">{{ $politics->title }}</h3>
+                                <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
                             </div>
                         </li>
                         @endforeach
@@ -173,7 +176,7 @@
             <div class="mb-2">
               <figure class="mb-4"><img src="{{ asset('/storage/' . $entertainment->image) }}" alt="News" height="220" class="w-100 object-fit-cover"/></figure>
               <div class="text-center news_content">
-                <h3 class="h4 position-relative">{{ $entertainment->title }}</h3>
+                <h3 class="h4 position-relative"><a href="{{ route('content.newsDetails', $entertainment->slug) }}">{{ $entertainment->title }}</a></h3>
                 <p>
                     {{ $entertainment->excerpt }}
                 </p>
@@ -197,7 +200,7 @@
                     <figure><img src="{{ asset('/storage/' . $culture->image) }}" alt="News" width="127"/>
                     </figure>
                     <div class="news_summary">
-                      <h3 class="h6">{{$culture->title}}</h3>
+                      <h3 class="h6"><a href="{{ route('content.newsDetails', $culture->slug) }}">{{$culture->title}}</a></h3>
                     </div>
                   </li>
                 @endforeach
@@ -211,7 +214,7 @@
                   <li class="d-flex align-items-center">
                   <figure><img src="{{ asset('/storage/' . $international->image) }}" alt="News" width="127"/></figure>
                   <div class="news_summary">
-                    <h3 class="h6">{{$international->title}}</h3>
+                    <h3 class="h6"><a href="{{ route('content.newsDetails', $international->slug) }}">{{$international->title}}</a></h3>
                   </div>
                   </li>
                 @endforeach
@@ -225,7 +228,7 @@
                   <li class="d-flex align-items-center">
                   <figure><img src="{{ asset('/storage/' . $future->image) }}" alt="News" width="127"/></figure>
                   <div class="news_summary">
-                    <h3 class="h6">{{$future->title}}</h3>
+                    <h3 class="h6"><a href="{{ route('content.newsDetails', $future->slug) }}">{{$future->title}}</a></h3>
                   </div>
                   </li>
                 @endforeach
@@ -245,42 +248,30 @@
             <div class="col-lg-8 photo_gallery mb-3 mb-md-0">
               <h2 class="h5 text-uppercase title_h2">Photo gallery </h2>
               <div class="slider-for d1">
-                <div class="photo-items"><img src="{{ asset('assets/img/gallery/gallery_lg1.jpg') }}" alt="Photo" width="796"
-                    height="420" class="w-100"></div>
-                <div class="photo-items"><img src="{{ asset('assets/img/gallery/gallery_lg1.jpg') }}" alt="Photo" width="796"
-                    height="420" class="w-100"></div>
-                <div class="photo-items"><img src="{{ asset('assets/img/gallery/gallery_lg1.jpg') }}" alt="Photo" width="796"
-                    height="420" class="w-100"></div>
-                <div class="photo-items"><img src="{{ asset('assets/img/gallery/gallery_lg1.jpg') }}" alt="Photo" width="796"
-                    height="420" class="w-100"></div>
-                <div class="photo-items"><img src="{{ asset('assets/img/gallery/gallery_lg1.jpg') }}" alt="Photo" width="796"
-                    height="420" class="w-100"></div>
-                <div class="photo-items"><img src="{{ asset('assets/img/gallery/gallery_lg1.jpg') }}" alt="Photo" width="796"
-                    height="420" class="w-100"></div>
+                @foreach($photos as $photo)
+                <div class="photo-items"><img src="{{ asset('storage/' . $photo->image_path) }}" alt="Photo" width="796"
+                    height="420" class="w-100">
+                </div>
+                @endforeach
               </div>
 
               <div class="slider-nav mb-3 mb-md-0">
-                <div class="slide-thumb"><img src="{{ asset('assets/img/gallery/g_thumb_1.jpg') }}" width="148px" height="100"
-                    alt="Photo thumb" class="w-100"></div>
-                <div class="slide-thumb"><img src="{{ asset('assets/img/gallery/g_thumb_2.jpg') }}" width="148px" height="100"
-                    alt="Photo thumb" class="w-100"></div>
-                <div class="slide-thumb"><img src="{{ asset('assets/img/gallery/g_thumb_3.jpg') }}" width="148px" height="100"
-                    alt="Photo thumb" class="w-100"></div>
-                <div class="slide-thumb"><img src="{{ asset('assets/img/gallery/g_thumb_4.jpg') }}" width="148px" height="100"
-                    alt="Photo thumb" class="w-100"></div>
-                <div class="slide-thumb"><img src="{{ asset('assets/img/gallery/g_thumb_5.jpg') }}" width="148px" height="100"
-                    alt="Photo thumb" class="w-100"></div>
-                <div class="slide-thumb"><img src="{{ asset('assets/img/gallery/g_thumb_3.jpg') }}" width="148px" height="100"
-                    alt="Photo thumb" class="w-100"></div>
+                @foreach($photos as $photo)
+                  <div class="slide-thumb"><img src="{{ asset('storage/' . $photo->image_path) }}" width="148px" height="100"
+                    alt="Photo thumb" class="object-fit-cover">
+                  </div>
+                @endforeach
               </div> 
             </div>
 
             <aside class="col-lg-4 sidebar_rht video-sidebar pt-0 mt-0 mt-md-2">
-              <h2 class="h5 text-uppercase title_h2">Latest News</h2>
+              <h2 class="h5 text-uppercase title_h2">Video Gallery</h2>
               <ul class="list-unstyled latest_news m-0">
+                @foreach($videos as $video)
                 <li class="d-flex align-items-center">
+
                   <figure class="position-relative">
-                    <img src="{{ asset('assets/img/latest-news/lt-news_thumb_1.jpg') }}" alt="News" width="127">
+                    <a href="{{ $video->video_url }}"><img src="{{ asset('storage/' . $video->cover_photo) }}" alt="{{ $video->title }}" width="127">
                     <button class="play_icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_6_248)">
@@ -295,77 +286,14 @@
                         </defs>
                       </svg>
                     </button>
+                    </a>
                   </figure>
+                  
                   <div class="news_summary" bis_skin_checked="1">
-                    <h3 class="h6">Ask Amy: Sending gifts to my grandsons’ half siblings, too? No thanks.</h3>
+                    <h3 class="h6">{{ $video->title }}</h3>
                   </div>
                 </li>
-                <li class="d-flex align-items-center">
-                  <figure class="position-relative">
-                    <img src="{{ asset('assets/img/latest-news/lt-news_thumb_1.jpg') }}" alt="News" width="127" class="w-100">
-                    <button class="play_icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_6_248)">
-                          <path
-                            d="M16 0C20.2435 0 24.3131 1.68571 27.3137 4.68629C30.3143 7.68687 32 11.7565 32 16C32 20.2435 30.3143 24.3131 27.3137 27.3137C24.3131 30.3143 20.2435 32 16 32C11.7565 32 7.68687 30.3143 4.68629 27.3137C1.68571 24.3131 0 20.2435 0 16C0 11.7565 1.68571 7.68687 4.68629 4.68629C7.68687 1.68571 11.7565 0 16 0ZM3 16C3 19.4478 4.36964 22.7544 6.80761 25.1924C9.24558 27.6304 12.5522 29 16 29C19.4478 29 22.7544 27.6304 25.1924 25.1924C27.6304 22.7544 29 19.4478 29 16C29 12.5522 27.6304 9.24558 25.1924 6.80761C22.7544 4.36964 19.4478 3 16 3C12.5522 3 9.24558 4.36964 6.80761 6.80761C4.36964 9.24558 3 12.5522 3 16ZM12.758 10.454L21.286 15.572C21.3597 15.6165 21.4207 15.6793 21.463 15.7543C21.5053 15.8293 21.5275 15.9139 21.5275 16C21.5275 16.0861 21.5053 16.1707 21.463 16.2457C21.4207 16.3207 21.3597 16.3835 21.286 16.428L12.758 21.546C12.6822 21.5917 12.5956 21.6164 12.507 21.6177C12.4185 21.6189 12.3313 21.5966 12.2542 21.5531C12.1771 21.5096 12.1129 21.4464 12.0683 21.3699C12.0236 21.2935 12.0001 21.2065 12 21.118V10.884C11.9997 10.7953 12.023 10.7081 12.0675 10.6314C12.112 10.5547 12.1761 10.4912 12.2533 10.4474C12.3304 10.4036 12.4178 10.3812 12.5065 10.3823C12.5952 10.3835 12.682 10.4082 12.758 10.454Z"
-                            fill="white" />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_6_248">
-                            <rect width="32" height="32" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </button>
-                  </figure>
-                  <div class="news_summary" bis_skin_checked="1">
-                    <h3 class="h6">Ask Amy: Sending gifts to my grandsons’ half siblings, too? No thanks.</h3>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <figure class="position-relative">
-                    <img src="{{ asset('assets/img/latest-news/lt-news_thumb_1.jpg') }}" alt="News" width="127" class="w-100">
-                    <button class="play_icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_6_248)">
-                          <path
-                            d="M16 0C20.2435 0 24.3131 1.68571 27.3137 4.68629C30.3143 7.68687 32 11.7565 32 16C32 20.2435 30.3143 24.3131 27.3137 27.3137C24.3131 30.3143 20.2435 32 16 32C11.7565 32 7.68687 30.3143 4.68629 27.3137C1.68571 24.3131 0 20.2435 0 16C0 11.7565 1.68571 7.68687 4.68629 4.68629C7.68687 1.68571 11.7565 0 16 0ZM3 16C3 19.4478 4.36964 22.7544 6.80761 25.1924C9.24558 27.6304 12.5522 29 16 29C19.4478 29 22.7544 27.6304 25.1924 25.1924C27.6304 22.7544 29 19.4478 29 16C29 12.5522 27.6304 9.24558 25.1924 6.80761C22.7544 4.36964 19.4478 3 16 3C12.5522 3 9.24558 4.36964 6.80761 6.80761C4.36964 9.24558 3 12.5522 3 16ZM12.758 10.454L21.286 15.572C21.3597 15.6165 21.4207 15.6793 21.463 15.7543C21.5053 15.8293 21.5275 15.9139 21.5275 16C21.5275 16.0861 21.5053 16.1707 21.463 16.2457C21.4207 16.3207 21.3597 16.3835 21.286 16.428L12.758 21.546C12.6822 21.5917 12.5956 21.6164 12.507 21.6177C12.4185 21.6189 12.3313 21.5966 12.2542 21.5531C12.1771 21.5096 12.1129 21.4464 12.0683 21.3699C12.0236 21.2935 12.0001 21.2065 12 21.118V10.884C11.9997 10.7953 12.023 10.7081 12.0675 10.6314C12.112 10.5547 12.1761 10.4912 12.2533 10.4474C12.3304 10.4036 12.4178 10.3812 12.5065 10.3823C12.5952 10.3835 12.682 10.4082 12.758 10.454Z"
-                            fill="white" />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_6_248">
-                            <rect width="32" height="32" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </button>
-                  </figure>
-                  <div class="news_summary" bis_skin_checked="1">
-                    <h3 class="h6">Ask Amy: Sending gifts to my grandsons’ half siblings, too? No thanks.</h3>
-                  </div>
-                </li>
-                <li class="d-flex align-items-center">
-                  <figure class="position-relative">
-                    <img src="{{ asset('assets/img/latest-news/lt-news_thumb_1.jpg') }}" alt="News" width="127" class="w-100">
-                    <button class="play_icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_6_248)">
-                          <path
-                            d="M16 0C20.2435 0 24.3131 1.68571 27.3137 4.68629C30.3143 7.68687 32 11.7565 32 16C32 20.2435 30.3143 24.3131 27.3137 27.3137C24.3131 30.3143 20.2435 32 16 32C11.7565 32 7.68687 30.3143 4.68629 27.3137C1.68571 24.3131 0 20.2435 0 16C0 11.7565 1.68571 7.68687 4.68629 4.68629C7.68687 1.68571 11.7565 0 16 0ZM3 16C3 19.4478 4.36964 22.7544 6.80761 25.1924C9.24558 27.6304 12.5522 29 16 29C19.4478 29 22.7544 27.6304 25.1924 25.1924C27.6304 22.7544 29 19.4478 29 16C29 12.5522 27.6304 9.24558 25.1924 6.80761C22.7544 4.36964 19.4478 3 16 3C12.5522 3 9.24558 4.36964 6.80761 6.80761C4.36964 9.24558 3 12.5522 3 16ZM12.758 10.454L21.286 15.572C21.3597 15.6165 21.4207 15.6793 21.463 15.7543C21.5053 15.8293 21.5275 15.9139 21.5275 16C21.5275 16.0861 21.5053 16.1707 21.463 16.2457C21.4207 16.3207 21.3597 16.3835 21.286 16.428L12.758 21.546C12.6822 21.5917 12.5956 21.6164 12.507 21.6177C12.4185 21.6189 12.3313 21.5966 12.2542 21.5531C12.1771 21.5096 12.1129 21.4464 12.0683 21.3699C12.0236 21.2935 12.0001 21.2065 12 21.118V10.884C11.9997 10.7953 12.023 10.7081 12.0675 10.6314C12.112 10.5547 12.1761 10.4912 12.2533 10.4474C12.3304 10.4036 12.4178 10.3812 12.5065 10.3823C12.5952 10.3835 12.682 10.4082 12.758 10.454Z"
-                            fill="white" />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_6_248">
-                            <rect width="32" height="32" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </button>
-                  </figure>
-                  <div class="news_summary" bis_skin_checked="1">
-                    <h3 class="h6">Ask Amy: Sending gifts to my grandsons’ half siblings, too? No thanks.</h3>
-                  </div>
-                </li>
+                @endforeach
               </ul>
             </aside>
 
@@ -383,5 +311,41 @@
   .object-fit-cover {
     object-fit: cover;
   }
+  .news_summary a:hover {
+      color: var(--black-color);
+  }
+  #iframe-container {
+      display: none;
+      width: 100%;
+      max-width: 640px;
+      margin: 20px auto;
+  }
+
+  iframe {
+      width: 100%;
+      height: 360px;
+      border: none;
+  }
 </style>
+<script>
+    document.getElementById('play-button').addEventListener('click', function() {
+        document.getElementById('poster-container').style.display = 'none';
+        document.getElementById('iframe-container').style.display = 'block';
+    });
+
+    
+</script>
+
+@section('page-scripts')
+<script>
+  $(document).ready(function(){
+    $('.video-sidebar').magnificPopup({
+      delegate: 'a', // child items selector, by clicking on it popup will open
+      type: 'iframe'
+    });
+  });
+</script>
+<script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+@endsection
+
 @include('front.partials.footer')

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
+use App\Models\PhotoGallery;
+use App\Models\VideoGallery;
 
 use App\Models\Setting;
 
@@ -28,6 +30,10 @@ class HomeController extends Controller
 
     private function getHomePageData(): array
     {
+        $liveStreamingSettings = json_decode(Setting::where('key', 'live_streaming_settings')->value('value'), true);
+        $photos = PhotoGallery::all();
+        $videos = VideoGallery::latest()->take(4)->get();
+
         return [
             'breakingNews' => $this->news->getLatestBreakingNews(),
             'featuredNews' => $this->news->getFeaturedNews(),
@@ -38,7 +44,9 @@ class HomeController extends Controller
             'internationalNews' => $this->news->getLatestByCategory('international'),
             'futureNews' => $this->news->getLatestByCategory('politics'),
             'politicsNews' => $this->news->getLatestByCategory('politics', 9),
-            'liveStreamUrl' =>  $this->setting->get('live_streaming_url')
+            'liveStreamingSettings' =>  $liveStreamingSettings,
+            'photos' => $photos,
+            'videos' => $videos
         ];
     }
 }
