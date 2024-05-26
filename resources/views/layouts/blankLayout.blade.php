@@ -14,7 +14,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
 
 @include('layouts/sections/styles')
-  <title>Sign in | Geeks - Bootstrap 5 Template </title>
+  <title>Sign in | Suma24news </title>
 </head>
 
 <body>
@@ -22,3 +22,4 @@
 <main>
 
 @yield('content')
+@include('layouts/sections/scripts')

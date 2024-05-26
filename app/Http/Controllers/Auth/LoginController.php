@@ -32,8 +32,10 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        $remember = $request->has('remember');
+
         // Attempt to log the user in
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
             // Check if the user is an admin

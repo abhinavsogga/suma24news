@@ -12,6 +12,8 @@ use App\Models\VideoGallery;
 use App\Models\Setting;
 use App\Models\User;
 
+use Illuminate\Support\Str;
+
 class HomeController extends Controller
 {
     public function __construct(Setting $setting, News $news)

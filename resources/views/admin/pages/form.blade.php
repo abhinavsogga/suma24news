@@ -15,8 +15,9 @@
         </div>
           <!-- input -->
         <div class="mb-3">
-            <label class="form-label" for="description">{{ __('Description') }}</label>
-            <textarea id="description" class="form-control" name="description">{{old('description', $page->description ?? '')}}</textarea>
+          <label class="form-label" for="description">{{ __('Description') }}</label>
+          <input type="hidden" id="description" name="description" value="{!! old('description', $page->description ?? '') !!}"/>
+          <div id="editor" class="mb-3">{!! old('description', $page->description ?? '') !!}</div>
         </div>
         <div class="mb-3">
                 <label class="form-label" for="status">{{ __('Status') }}</label>
@@ -28,3 +29,11 @@
       </div>
     </div>
   </div>
+
+  <script>
+  // On form submission, get the content and put it in the hidden input
+  document.getElementById('pageForm').onsubmit = function() {
+      var content = quill.root.innerHTML;
+      document.getElementById('description').value = content;
+  };
+</script>

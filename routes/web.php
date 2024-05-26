@@ -20,7 +20,7 @@ use App\Http\Controllers\Front\LikeDislikeController;
 use App\Http\Controllers\UserVisitController;
 
 // Admin
-Route::middleware(['role:admin'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/users', UserController::class);

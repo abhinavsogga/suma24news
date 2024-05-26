@@ -15,8 +15,9 @@
         </div>
           <!-- input -->
         <div class="mb-3">
-            <label class="form-label" for="description">{{ __('Description') }}</label>
-            <textarea id="description" class="form-control" name="description">{{old('description', $news->description ?? '')}}</textarea>
+          <label class="form-label" for="description">{{ __('Description') }}</label>
+          <input type="hidden" id="description" name="description" value="{!! old('description', $news->description ?? '') !!}"/>
+          <div id="editor" class="mb-3">{!! old('description', $news->description ?? '') !!}</div>
         </div>
         <div class="mb-3">
             <!-- heading -->
@@ -80,50 +81,10 @@
 </div>
 
 </div>
-<!-- 
-
-<div class="mb-3">
-    <label class="form-label" for="title">{{ __('Title') }}</label>
-    <input type="text" name="title" value="{{old('title', $news->title ?? '')}}" class="form-control">
-</div>
-
-<div class="mb-3">
-    <label class="form-label" for="description">{{ __('Description') }}</label>
-    <textarea id="description" class="form-control" name="description">{{old('description', $news->description ?? '')}}</textarea>
-</div>
-
-<div class="mb-3">
-    <label class="form-label" for="image">{{ __('Image') }}</label>
-    <input type="file" name="image" class="form-control"/>
-</div>
-
-<div class="mb-3">
-    <label class="form-label" for="category">{{ __('Category') }}</label>
-    <select class="form-control" name="category_id">
-        <option value="">--Select Category--</option>
-        @foreach ($categories as $category)
-            <option value="{{ $category->id }}" {{ old('category_id', $news->category_id ?? 0) == $category->id ? 'selected' : '' }}>{{ $category->title }}</option>
-        @endforeach
-    </select>
-</div>
-
-<div class="form-check mb-3">
-  <input class="form-check-input" type="checkbox" value="1" id="is_breaking" name="is_breaking" {{ old('is_breaking', $news->is_breaking ?? 0) == 1 ? 'checked' : '' }}>
-  <label class="form-check-label" for="is_breaking">
-  {{ __('Is Breaking News') }}
-  </label>
-</div>
-
-<div class="mb-3">
-    <label class="form-label" for="tags">{{ __('Tags') }}</label>
-    <input type="text" name="tags" value="{{old('tags', $news->tags ?? '')}}" class="form-control">
-</div>
-
-<div class="mb-3">
-    <label class="form-label" for="status">{{ __('Status') }}</label>
-    <select name="status" id="status" class="form-control">
-		<option value="published" {{ old('status', $news->status ?? '') == 'published' ? 'selected' : '' }}>{{ __('Published') }}</option>
-        <option value="draft" {{ old('status', $news->status ?? '') == 'draft' ? 'selected' : '' }}>{{ __('Draft') }}</option>
-        <option value="archived" {{ old('status', $news->status ?? '') == 'archived' ? 'selected' : '' }}>{{ __('Archived') }}</option>
-	</select>
-</div> -->
+<script>
+  // On form submission, get the content and put it in the hidden input
+  document.getElementById('newsForm').onsubmit = function() {
+      var content = quill.root.innerHTML;
+      document.getElementById('description').value = content;
+  };
+</script>

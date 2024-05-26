@@ -3,7 +3,13 @@
 @section('title', __('Add News'))
 
 @section('page-script')
-{{ asset('assets/admin/js/vendors/editor.js') }}
+<script src="{{ asset('assets/libs/quill/quill.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/vendors/editor.js') }}"></script>
+<script src="{{ asset('assets/libs/tagify/tagify.min.js') }}"></script>
+@endsection
+
+@section('page-style')
+<link href="asset('assets/libs/tagify/tagify.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -19,13 +25,13 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="admin-dashboard.html">Dashboard</a>
+                      <a href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item">
-                      <a href="#">News </a>
+                      <a href="{{ route('news.index') }}">News </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                      Add Product
+                      Add News
                     </li>
                   </ol>
                 </nav>
@@ -33,7 +39,7 @@
             </div>
           </div>
         </div>
-        <form method="POST" action="{{ route('news.store') }}" enctype="multipart/form-data">
+        <form id="newsForm" method="POST" action="{{ route('news.store') }}" enctype="multipart/form-data">
         @method('POST')
           @csrf
           @include('admin.news.form')

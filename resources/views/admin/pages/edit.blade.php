@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        <form method="POST" action="{{ route('pages.update', $page->id) }}">
+        <form method="POST" id="pageForm" action="{{ route('pages.update', $page->id) }}">
           @method('PUT')
           @csrf
           @include('admin.pages.form', ['page' => $page])

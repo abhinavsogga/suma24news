@@ -11,8 +11,8 @@
         <div class="card shadow ">
           <!-- Card body -->
           <div class="card-body p-6">
-            <div class="mb-4">
-              <a href="../index.html"><img src="../assets/images/brand/logo/logo-icon.svg" class="mb-4" alt=""></a>
+            <div class="mb-4 text-center">
+              <a href="/"><img src="{{asset('assets/img/logo.png')}}" class="mb-4" alt="" width="200"></a>
               <h1 class="mb-1 fw-bold">Sign in</h1>
               <span>Don’t have an account? <a href="{{ route('register') }}" class="ms-1">Sign up</a></span>
             </div>
@@ -34,7 +34,7 @@
               	<!-- Checkbox -->
               <div class="d-lg-flex justify-content-between align-items-center mb-4">
                 <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="rememberme">
+                  <input type="checkbox" class="form-check-input" id="rememberme" name="remember">
                   <label class="form-check-label " for="rememberme">Remember me</label>
                 </div>
                 <div>

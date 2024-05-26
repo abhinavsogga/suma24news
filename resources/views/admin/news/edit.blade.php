@@ -2,6 +2,12 @@
 
 @section('title', __('Edit News'))
 
+@section('page-script')
+<script src="{{ asset('assets/libs/quill/quill.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/vendors/editor.js') }}"></script>
+<script src="{{ asset('assets/libs/tagify/tagify.min.js') }}"></script>
+@endsection
+
 @section('content')
 <!-- Container fluid -->
 <div class="container-fluid p-4">
@@ -29,7 +35,7 @@
             </div>
           </div>
         </div>
-        <form method="POST" action="{{ route('news.update', $news->id) }}" enctype="multipart/form-data">
+        <form id="newsForm" method="POST" action="{{ route('news.update', $news->id) }}" enctype="multipart/form-data">
           @method('PUT')
           @csrf
           @include('admin.news.form', ['categories' => $categories])

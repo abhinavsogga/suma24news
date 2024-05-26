@@ -33,7 +33,7 @@
             </div>
           </div>
         </div>
-        <form method="POST" action="{{ route('pages.store') }}">
+        <form method="POST" id="pageForm" action="{{ route('pages.store') }}">
         @method('POST')
           @csrf
           @include('admin.pages.form')
