@@ -6,17 +6,19 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\User;
 
-class NewNewsNotification extends Notification
+class RegisterNotification extends Notification
 {
     use Queueable;
+    public $newUser;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(User $newUser)
     {
-        //
+        $this->newUser = $newUser;
     }
 
     /**
@@ -26,7 +28,7 @@ class NewNewsNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database'];
+        return ['database'];
     }
 
     /**
@@ -45,10 +47,11 @@ class NewNewsNotification extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toDatabase($notifiable)
+    public function toDatabase(object $notifiable): array
     {
         return [
-            'message' => 'Someone has added new news.',
+            'message' => $this->newUser->name. ' has register on site.',
+            'link' => route('users.index'),
             // Add any additional data you want to store in the database
         ];
     }

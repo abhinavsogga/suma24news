@@ -12,8 +12,6 @@ use App\Http\Requests\StoreNewsRequest;
 
 use Illuminate\Support\Facades\Storage;
 
-use App\Events\NewsCreated;
-
 class NewsController extends Controller
 {
     /**

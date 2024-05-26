@@ -7,20 +7,20 @@
         <div class="row">
           <div class="col-md-8">
             <div class="w-100 news-slider">
-              @foreach($breakingNews as $breaking)
-              <div class="position-relative slide-items">
-                <div class="news_slide_content">
-                  <img src="{{ asset('/storage/' . $breaking->image) }}" alt="Slide 1" width="700" height="400">
-                  <div class="news_info">
-                    <span data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{$breaking->category->title}}
-                    </span>
-                    <h2 class="h2" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{$breaking->title}}</h2>
-                    <a href="{{ route('content.newsDetails', $breaking->slug) }}" data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms"
-                      class="btn btn-md btn-yellow">Read More</a>
-                  </div>
-                </div>
-              </div>
-              @endforeach
+                @foreach($breakingNews as $breaking)
+                    <div class="position-relative slide-items">
+                        <div class="news_slide_content">
+                        <img src="{{ asset('/storage/' . $breaking->image) }}" alt="Slide 1" width="700" height="400">
+                        <div class="news_info">
+                            <span data-animation="fadeInUp" data-delay=".2s" data-duration="1000ms">{{$breaking->category->title}}
+                            </span>
+                            <h2 class="h2" data-animation="fadeInUp" data-delay=".4s" data-duration="1000ms">{{$breaking->title}}</h2>
+                            <a href="{{ route('content.newsDetails', $breaking->slug) }}" data-animation="fadeInUp" data-delay=".6s" data-duration="1000ms"
+                            class="btn btn-md btn-yellow">Read More</a>
+                        </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
           </div>
 
@@ -115,57 +115,57 @@
       <!-- End Education News -->
 
  <!-- start Politics News -->
-    <div class="politics_news mb-5">
-        <div class="container">
-            <hr class="my-4">
-            <h2 class="h5 text-uppercase title_h2">Politics</h2>
-            <div class="row mt-2 align-items-center">
-                <aside class="col-lg-6 sidebar_lft">
-                    <div class="news_posts">
-                        <div class="row gx-0 align-items-center post_items">
-                            <figure class="col-md-6 mb-3 mb-md-0"><img src="{{ asset('/storage/' . $politicsNews[0]->image) }}" alt="News" height="400px" class="w-100 object-fit-cover"></figure>
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <div class="news_summary">
-                                    <h3 class="h2"><a href="{{ route('content.newsDetails', $politicsNews[0]->slug) }}">{{ $politicsNews[0]->title }}</a></h3>
-                                    <p>{{ $politicsNews[0]->excerpt }}</p>
+    @if(count($politicsNews) > 0)
+        <div class="politics_news mb-5">
+            <div class="container">
+                <hr class="my-4">
+                <h2 class="h5 text-uppercase title_h2">Politics</h2>
+                <div class="row mt-2 align-items-center">
+                    <aside class="col-lg-6 sidebar_lft">
+                        <div class="news_posts">
+                            <div class="row gx-0 align-items-center post_items">
+                                <figure class="col-md-6 mb-3 mb-md-0"><img src="{{ asset('/storage/' . $politicsNews[0]->image) }}" alt="News" height="400px" class="w-100 object-fit-cover"></figure>
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <div class="news_summary">
+                                        <h3 class="h2"><a href="{{ route('content.newsDetails', $politicsNews[0]->slug) }}">{{ $politicsNews[0]->title }}</a></h3>
+                                        <p>{{ $politicsNews[0]->excerpt }}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </aside>
-                <!-- End Sidebar Left -->
+                    </aside>
+                    <!-- End Sidebar Left -->
 
-                <aside class="col-lg-3 sidebar_rht mt-0 pt-0 mt-md-2">
-                    <ul class="list-unstyled latest_news m-0">
-                        @foreach ($politicsNews->skip(1)->take(3) as $politics)
-                        <li class="d-flex align-items-center border-0">
-                            <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127" ></figure>
-                            <div class="news_summary">
-                                <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </aside>
+                    <aside class="col-lg-3 sidebar_rht mt-0 pt-0 mt-md-2">
+                        <ul class="list-unstyled latest_news m-0">
+                            @foreach ($politicsNews->skip(1)->take(3) as $politics)
+                            <li class="d-flex align-items-center border-0">
+                                <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127" ></figure>
+                                <div class="news_summary">
+                                    <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </aside>
 
-                <aside class="col-lg-3 sidebar_rht mt-0 mt-md-2 pt-0">
-                    <ul class="list-unstyled latest_news m-0">
-                        @foreach ($politicsNews->skip(4)->take(3) as $politics)
-                        <li class="d-flex align-items-center border-0">
-                            <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127"></figure>
-                            <div class="news_summary">
-                                <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
-                            </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </aside>
+                    <aside class="col-lg-3 sidebar_rht mt-0 mt-md-2 pt-0">
+                        <ul class="list-unstyled latest_news m-0">
+                            @foreach ($politicsNews->skip(4)->take(3) as $politics)
+                            <li class="d-flex align-items-center border-0">
+                                <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127"></figure>
+                                <div class="news_summary">
+                                    <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
+                                </div>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </aside>
+                </div>
             </div>
         </div>
-    </div>
-
-
- <!-- End Politics News -->
+    @endif
+    <!-- End Politics News -->
 
       <div class="entertainment_news bg_blue my-4">
         <div class="container">

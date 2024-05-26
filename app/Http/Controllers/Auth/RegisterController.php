@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Events\NewRegistration;
 
 class RegisterController extends Controller
 {
@@ -44,7 +45,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
+        
+        event(new NewRegistration($user));
         // Log the user in
         auth()->login($user);
 

@@ -70,23 +70,48 @@ class News extends Model
         return Str::limit($text, $length, '...');
     }
 
-    public function getLatestNews(int $limit = 10) {
-        return self::latest()
-            ->take($limit)
-            ->get();
+    public function scopeBreaking($query)
+    {
+        return $query->where('is_breaking', 1);
     }
 
-    public function getLatestBreakingNews(int $limit = 10)
+    public function scopeFeatured($query)
     {
-        return self::where('is_breaking', 1)
+        return $query->where('is_featured', 1);
+    }
+
+    public function getLatestBreakingNews(int $priorityCategoryId = 0, int $limit = 10)
+    {
+        return $this->getNewsQuery($priorityCategoryId)
+            ->breaking()
             ->latest()
             ->take($limit)
             ->get();
     }
 
-    public function getFeaturedNews(int $limit = 3)
+    public function getFeaturedNews(int $priorityCategoryId = 0, int $limit = 3)
     {
-        return self::where('is_featured', 1)
+        return $this->getNewsQuery($priorityCategoryId)
+            ->featured()
+            ->latest()
+            ->take($limit)
+            ->get();
+    }
+
+    private function getNewsQuery(int $priorityCategoryId = 0)
+    {
+        $query = $this->newQuery();
+
+        if ($priorityCategoryId > 0) {
+            $query->orderByRaw("category_id = $priorityCategoryId DESC, created_at DESC");
+        }
+
+        return $query;
+    }
+
+    public function getLatestNews(int $priorityCategoryId = 0, int $limit = 10)
+    {
+        return $this->getNewsQuery($priorityCategoryId)
             ->latest()
             ->take($limit)
             ->get();
@@ -101,7 +126,6 @@ class News extends Model
         ->take($limit)
         ->get();
     }
-    
 
     /**
      * Boot the model.
@@ -115,5 +139,15 @@ class News extends Model
         static::creating(function ($model) {
             $model->slug = Str::slug($model->title);
         });
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(LikeDislike::class)->where('is_like', true);
+    }
+
+    public function dislikes()
+    {
+        return $this->hasMany(LikeDislike::class)->where('is_like', false);
     }
 }

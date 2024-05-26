@@ -18,4 +18,28 @@
         </div>
     </div>
 </div>
+@section('page-scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+		window.startTime = new Date().getTime();
+	});
+
+    window.addEventListener('beforeunload', function() {
+        let endTime = new Date().getTime();
+        let duration = (endTime - window.startTime) / 1000; // Convert to seconds
+
+        fetch('/log-time-spent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({
+                visit_id: {{ session('visit_id') }},
+                time_spent: duration
+            })
+        });
+    });
+</script>
+@endsection
 @include('front.partials.footer')

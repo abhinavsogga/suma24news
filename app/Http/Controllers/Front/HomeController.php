@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\News;
 use App\Models\PhotoGallery;
 use App\Models\VideoGallery;
 
 use App\Models\Setting;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -23,21 +25,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('front.index', $this->getHomePageData());
+        return view('front.index', $this->getHomePageData($request));
     }
 
-    private function getHomePageData(): array
+    private function getHomePageData($request): array
     {
         $liveStreamingSettings = json_decode(Setting::where('key', 'live_streaming_settings')->value('value'), true);
         $photos = PhotoGallery::all();
         $videos = VideoGallery::latest()->take(4)->get();
 
+        $userId = Auth::id();
+        $guestId = $request->cookie('guest_id') ?? Str::uuid();
+
+        $mostVisitedCategory = (int) User::getMostVisitedCategory($userId, $guestId);
+
         return [
-            'breakingNews' => $this->news->getLatestBreakingNews(),
-            'featuredNews' => $this->news->getFeaturedNews(),
-            'latestNews' => $this->news->getLatestNews(6),
+            'breakingNews' => $this->news->getLatestBreakingNews($mostVisitedCategory),
+            'featuredNews' => $this->news->getFeaturedNews($mostVisitedCategory),
+            'latestNews' => $this->news->getLatestNews($mostVisitedCategory, 6),
             'educationNews' => $this->news->getLatestByCategory('education', 10),
             'entertainmentNews' => $this->news->getLatestByCategory('entertainment', 10),
             'cultureNews' => $this->news->getLatestByCategory('culture'),

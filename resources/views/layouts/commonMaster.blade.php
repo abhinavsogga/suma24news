@@ -70,191 +70,51 @@
                                 </div>
                                 <!-- List group -->
                                 <ul class="list-group list-group-flush" data-simplebar style="max-height: 300px;">
-                                    <li class="list-group-item bg-light">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img
-                                                        src="../../../assets/images/avatar/avatar-1.jpg"
-                                                        alt=""
-                                                        class="avatar-md rounded-circle"
-                                                    >
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Kristin Watson:</h5>
-                                                        <p class="mb-3">
-                                                            Krisitn Watsan like your comment on course
-                                                            Javascript Introduction!
-                                                        </p>
-                                                        <span class="fs-6 text-muted">
-                                                            <span
-                                                                ><span
-                                                                    class="fe fe-thumbs-up text-success me-1"
-                                                                ></span
-                                                                >2 hours ago,</span
-                                                            >
-                                                            <span class="ms-1">2:19 PM</span>
-                                                        </span>
+                                    @foreach (auth()->user()->unreadNotifications as $notification)
+                                        <li class="list-group-item">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <a class="text-body" href="{{ $notification->data['link'] ?? '#' }}">
+                                                    <div class="d-flex">                                               
+                                                        <div class="ms-3">
+                                                            <p class="mb-3">
+                                                                {!! $notification->data['message'] !!}
+                                                            </p>
+                                                            <span class="fs-6 text-muted">
+                                                                <span
+                                                                    ><span
+                                                                        class="fe fe-thumbs-up text-success me-1"
+                                                                    ></span
+                                                                    >{{ $notification->created_at->diffForHumans() }}</span
+                                                                >
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-auto text-center me-2">
-                                                <a
-                                                    href="#"
-                                                    class="badge-dot bg-info"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-
-                                                    title="Mark as read"
-                                                >
-                                                </a>
-                                                <div>
-                                                    <a
-                                                        href="#"
-                                                        class="bg-transparent"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-
-                                                        title="Remove"
-                                                    >
-                                                        <i class="fe fe-x text-muted"></i>
                                                     </a>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img
-                                                        src="../../../assets/images/avatar/avatar-2.jpg"
-                                                        alt=""
-                                                        class="avatar-md rounded-circle"
-                                                    >
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Brooklyn Simmons</h5>
-                                                        <p class="mb-3">
-                                                            Just launched a new Courses React for Beginner.
-                                                        </p>
-                                                        <span class="fs-6 text-muted">
-                                                            <span
-                                                                ><span
-                                                                    class="fe fe-thumbs-up text-success me-1"
-                                                                ></span
-                                                                >Oct 9,</span
-                                                            >
-                                                            <span class="ms-1">1:20 PM</span>
-                                                        </span>
+                                                <div class="col-auto text-center me-2">
+                                                        <form action="{{ route('notifications.mark-as-read', $notification) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="badge-dot bg-info border-0"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                title="Mark as read"
+                                                            ></button>
+                                                        </form>                                                       
+                                                        <div>
+                                                            <form action="{{ route('notifications.delete', $notification) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"  class="bg-transparent border-0"
+                                                                    data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top" title="Remove" ><i class="fe fe-x text-muted"></i></button>
+                                                            </form>                                                         
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                </a>
                                             </div>
-                                            <div class="col-auto text-center me-2">
-                                                <a
-                                                    href="#"
-                                                    class="badge-dot bg-secondary"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-
-                                                    title="Mark as unread"
-                                                >
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img
-                                                        src="../../../assets/images/avatar/avatar-3.jpg"
-                                                        alt=""
-                                                        class="avatar-md rounded-circle"
-                                                    >
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Jenny Wilson</h5>
-                                                        <p class="mb-3">
-                                                            Krisitn Watsan like your comment on course
-                                                            Javascript Introduction!
-                                                        </p>
-                                                        <span class="fs-6 text-muted">
-                                                            <span
-                                                                ><span
-                                                                    class="fe fe-thumbs-up text-info me-1"
-                                                                ></span
-                                                                >Oct 9,</span
-                                                            >
-                                                            <span class="ms-1">1:56 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-auto text-center me-2">
-                                                <a
-                                                    href="#"
-                                                    class="badge-dot bg-secondary"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-
-                                                    title="Mark as unread"
-                                                >
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col">
-                                                <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img
-                                                        src="../../../assets/images/avatar/avatar-4.jpg"
-                                                        alt=""
-                                                        class="avatar-md rounded-circle"
-                                                    >
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Sina Ray</h5>
-                                                        <p class="mb-3">
-                                                            You earn new certificate for complete the Javascript
-                                                            Beginner course.
-                                                        </p>
-                                                        <span class="fs-6 text-muted">
-                                                            <span
-                                                                ><span
-                                                                    class="fe fe-award text-warning me-1"
-                                                                ></span
-                                                                >Oct 9,</span
-                                                            >
-                                                            <span class="ms-1">1:56 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                </a>
-                                            </div>
-                                            <div class="col-auto text-center me-2">
-                                                <a
-                                                    href="#"
-                                                    class="badge-dot bg-secondary"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-
-                                                    title="Mark as unread"
-                                                >
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @endforeach
                                 </ul>
-                                <div class="border-top px-3 pt-3 pb-0">
-                                    <a href="../../../pages/notification-history.html" class="text-link fw-semi-bold">
-                                            See all Notifications
-                                        </a>
-                                </div>
                             </div>
                         </div>
                     </li>
