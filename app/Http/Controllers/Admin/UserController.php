@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
 use Spatie\Permission\Models\Role;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+
 class UserController extends Controller
 {
     /**
@@ -26,7 +28,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -37,10 +40,17 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        
+        // Create the user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
 
-        //return redirect()->route('news.index')
-            //->with('success', 'News created successfully.');
+        // Assign role to the user
+        $user->assignRole($request->role);
+
+        return redirect()->route('users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -52,30 +62,31 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        
-
-// Get all roles
-$roles = Role::all();
+        // Get all roles
+        $roles = Role::all();
         $user = User::findOrFail($id);
 
         return view('admin.users.edit', compact('user', 'roles'));
     }
 
-    /**
-     * Update the specified News in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(StoreUserRequest $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
+        // Update user details
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
 
+        if($request->password) {
+            $data['password'] = bcrypt($request->password);
+        }
 
+        $user->update($data);
 
-        //return redirect()->route('news.index')
-           // ->with('success', 'News updated successfully.');
+        // Sync user role
+        $user->syncRoles([$request->role]);
+
+        return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
 

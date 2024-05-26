@@ -42,14 +42,14 @@
                     
                 <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
                     <li class="dropdown stopevent">
-                        <a class="btn btn-light btn-icon rounded-circle indicator indicator-primary text-muted" href="#" role="button" id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="btn btn-light btn-icon rounded-circle  @if(count(auth()->user()->unreadNotifications) > 0) indicator indicator-primary @endif text-muted" href="#" role="button" id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fe fe-bell"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg" aria-labelledby="dropdownNotification">
                             <div>
                                 <div class="border-bottom px-3 pb-3 d-flex justify-content-between align-items-center">
                                     <span class="h4 mb-0">Notifications</span>
-                                    <a href="# " class="text-muted">
+                                    <a href="javascript:void(0);" class="text-muted">
                                         <span class="align-middle">
                                                 <i class="fe fe-settings me-1"></i>
                                             </span>
@@ -57,75 +57,75 @@
                                 </div>
                                 <!-- List group -->
                                 <ul class="list-group list-group-flush" data-simplebar style="max-height: 300px;">
-                                    @foreach (auth()->user()->unreadNotifications as $notification)
-                                        <li class="list-group-item">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <a class="text-body" href="{{ $notification->data['link'] ?? '#' }}">
-                                                    <div class="d-flex">                                               
-                                                        <div class="ms-3">
-                                                            <p class="mb-3">
-                                                                {!! $notification->data['message'] !!}
-                                                            </p>
-                                                            <span class="fs-6 text-muted">
-                                                                <span
-                                                                    ><span
-                                                                        class="fe fe-thumbs-up text-success me-1"
-                                                                    ></span
-                                                                    >{{ $notification->created_at->diffForHumans() }}</span
-                                                                >
-                                                            </span>
+                                    @if(count(auth()->user()->unreadNotifications) > 0)
+                                        @foreach (auth()->user()->unreadNotifications as $notification)
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <a class="text-body" href="{{ $notification->data['link'] ?? '#' }}">
+                                                        <div class="d-flex">                                               
+                                                            <div class="ms-3">
+                                                                <p class="mb-3">
+                                                                    {!! $notification->data['message'] !!}
+                                                                </p>
+                                                                <span class="fs-6 text-muted">
+                                                                    <span
+                                                                        ><span
+                                                                            class="fe fe-thumbs-up text-success me-1"
+                                                                        ></span
+                                                                        >{{ $notification->created_at->diffForHumans() }}</span
+                                                                    >
+                                                                </span>
+                                                            </div>
                                                         </div>
+                                                        </a>
                                                     </div>
-                                                    </a>
-                                                </div>
-                                                <div class="col-auto text-center me-2">
-                                                        <form action="{{ route('notifications.mark-as-read', $notification) }}" method="POST">
-                                                            @csrf
-                                                            <button type="submit" class="badge-dot bg-info border-0"
-                                                                data-bs-toggle="tooltip"
-                                                                data-bs-placement="top"
-                                                                title="Mark as read"
-                                                            ></button>
-                                                        </form>                                                       
-                                                        <div>
-                                                            <form action="{{ route('notifications.delete', $notification) }}" method="POST">
+                                                    <div class="col-auto text-center me-2">
+                                                            <form action="{{ route('notifications.mark-as-read', $notification) }}" method="POST">
                                                                 @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"  class="bg-transparent border-0"
+                                                                <button type="submit" class="badge-dot bg-info border-0"
                                                                     data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top" title="Remove" ><i class="fe fe-x text-muted"></i></button>
-                                                            </form>                                                         
+                                                                    data-bs-placement="top"
+                                                                    title="Mark as read"
+                                                                ></button>
+                                                            </form>                                                       
+                                                            <div>
+                                                                <form action="{{ route('notifications.delete', $notification) }}" method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"  class="bg-transparent border-0"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-placement="top" title="Remove" ><i class="fe fe-x text-muted"></i></button>
+                                                                </form>                                                         
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                       <li class="list-group-item">No new notification</li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
                     </li>
                     <!-- List -->
                     <li class="dropdown ms-2">
-                        <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="avatar avatar-md">
-                                <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" >
+                        <a class="btn btn-primary btn-icon rounded-circle text-white" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div>
+                                {{ substr(Auth::user()->name, 0, 1) }}
                             </div>
                         </a>
+
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                             <div class="dropdown-item">
                                 <div class="d-flex">
-                                    <div class="avatar avatar-md avatar-indicators avatar-online">
-                                        <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" >
-                                    </div>
                                     <div class="ms-3 lh-1">
                                         <h5 class="mb-1">{{ Auth::user()->name }}</h5>
                                         <p class="mb-0 text-muted">{{ Auth::user()->email }}</p>
                                     </div>
                                 </div>
                             </div>
-                           
-                            
                             <div class="dropdown-divider"></div>
                             <ul class="list-unstyled">
                                 <li>

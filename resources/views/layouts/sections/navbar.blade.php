@@ -1,15 +1,15 @@
 <nav class="navbar-vertical navbar navbar-dark">
      <div class="vh-100" data-simplebar>
          <!-- Brand logo -->
-         <a class="navbar-brand" href="/">
-             <img src="{{ asset('assets/img/logo.svg') }}" alt="" >
+         <a class="navbar-brand" href="/"  target="_blank">
+             <img src="{{ asset('assets/img/logo_white.png') }}" alt="" >
          </a>
          <!-- Navbar nav -->
          <ul class="navbar-nav flex-column" id="sideNavbar">
         
 
              <li class="nav-item">
-                 <a class="nav-link" href="/">
+                 <a class="nav-link" href="/" target="_blank">
                  <i class="nav-icon fe fe-home me-2"></i> Visit Site
                  </a>
              </li>

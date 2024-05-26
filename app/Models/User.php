@@ -44,6 +44,13 @@ class User extends Authenticatable
         ];
     }
 
+    // Accessor for the role attribute
+    public function getRoleAttribute()
+    {
+        // Get the user's role name or return null if the user has no roles
+        return $this->roles->isEmpty() ? null : $this->roles->first()->name;
+    }
+
     public static function getMostVisitedCategory($userId = null, $guestId = null)
     {
         if($userId) {

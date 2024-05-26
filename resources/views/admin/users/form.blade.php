@@ -11,24 +11,25 @@
           <!-- input -->
         <div class="mb-3">
           <label class="form-label">{{ __('Name') }}</label>
-          <input type="text" name="title" value="{{old('title', $user->name ?? '')}}" class="form-control">
+          <input type="text" name="name" value="{{old('name', $user->name ?? '')}}" class="form-control">
         </div>
           <!-- input -->
         <div class="mb-3">
           <label class="form-label">{{ __('Email') }}</label>
-          <input type="text" name="title" value="{{old('title', $user->email ?? '')}}" class="form-control">
+          <input type="text" name="email" value="{{old('email', $user->email ?? '')}}" class="form-control">
         </div>
         <div class="mb-3">
           <label class="form-label">{{ __('Password') }}</label>
-          <input type="text" name="title" value="" class="form-control">
+          <input type="password" name="password" value="" class="form-control">
         </div>
         <div class="mb-3">
-          <label class="form-label">{{ __('Rols') }}</label>
-          <Select name="role" class="form-control">
+          <label class="form-label">{{ __('Role') }}</label>
+          <select name="role" class="form-control">
+            <option>--Select Role--</option>
             @foreach($roles as $role)
-            <option>{{ $role->name }}</option>
+              <option value="{{ $role->name }}" @if(isset($user) && $user->role === $role->name) selected @endif>{{ ucfirst($role->name) }}</option>
             @endforeach
-          </Select>
+          </select>
         </div>
       </div>
     </div>

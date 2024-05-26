@@ -41859,7 +41859,7 @@ table tr:last-child td {
   display: block;
 }
 .navbar-vertical .navbar-brand img {
-  height: 1.875rem;
+  height: 4rem;
 }
 .navbar-vertical .navbar-heading {
   color: var(--geeks-gray-700);
