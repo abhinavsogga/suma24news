@@ -29,7 +29,10 @@
       </div>
     </div>
   </div>
-
+  @section('page-script')
+<script src="{{ asset('assets/libs/quill/quill.min.js') }}"></script>
+<script src="{{ asset('assets/admin/js/vendors/editor.js') }}"></script>
+@endsection
   <script>
   // On form submission, get the content and put it in the hidden input
   document.getElementById('pageForm').onsubmit = function() {

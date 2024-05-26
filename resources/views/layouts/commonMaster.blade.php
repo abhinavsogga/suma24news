@@ -37,22 +37,9 @@
                 <a id="nav-toggle" href="#">
                     <i class="fe fe-menu"></i>
                 </a>
-                <div class="ms-lg-3 d-none d-md-none d-lg-block">
-                    <!-- Form -->
-                    <form class="d-flex align-items-center">
-                        <span class="position-absolute ps-3 search-icon">
-                                <i class="fe fe-search"></i>
-                            </span>
-                        <input type="search" class="form-control ps-6" placeholder="Search Entire Dashboard" >
-                    </form>
-                </div>
                 <!--Navbar nav -->
                 <div class="ms-auto d-flex">
-                    <a href="#" class="form-check form-switch theme-switch btn btn-light btn-icon rounded-circle ">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                        <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                     
-                            </a>
                 <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
                     <li class="dropdown stopevent">
                         <a class="btn btn-light btn-icon rounded-circle indicator indicator-primary text-muted" href="#" role="button" id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -121,7 +108,7 @@
                     <!-- List -->
                     <li class="dropdown ms-2">
                         <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="avatar avatar-md avatar-indicators avatar-online">
+                            <div class="avatar avatar-md">
                                 <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" >
                             </div>
                         </a>
@@ -132,60 +119,17 @@
                                         <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" >
                                     </div>
                                     <div class="ms-3 lh-1">
-                                        <h5 class="mb-1">Annette Black</h5>
-                                        <p class="mb-0 text-muted">annette@geeksui.com</p>
+                                        <h5 class="mb-1">{{ Auth::user()->name }}</h5>
+                                        <p class="mb-0 text-muted">{{ Auth::user()->email }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="dropdown-divider"></div>
-                            <ul class="list-unstyled">
-                                <li class="dropdown-submenu dropstart-lg">
-                                    <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
-                                        <i class="fe fe-circle me-2"></i> Status
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="badge-dot bg-success me-2"></span> Online
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="badge-dot bg-secondary me-2"></span> Offline
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="badge-dot bg-warning me-2"></span> Away
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <span class="badge-dot bg-danger me-2"></span> Busy
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="../../../pages/profile-edit.html">
-                                        <i class="fe fe-user me-2"></i> Profile
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="../../../pages/student-subscriptions.html">
-                                        <i class="fe fe-star me-2"></i> Subscription
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fe fe-settings me-2"></i> Settings
-                                    </a>
-                                </li>
-                            </ul>
+                           
+                            
                             <div class="dropdown-divider"></div>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a class="dropdown-item" href="../../../index.html">
+                                    <a class="dropdown-item" href="{{route('logout')}}">
                                         <i class="fe fe-power me-2"></i> Sign Out
                                     </a>
                                 </li>

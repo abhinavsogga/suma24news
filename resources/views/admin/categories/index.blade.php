@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/commonMaster')
 
 @section('title', 'Categories')
 
@@ -10,17 +10,6 @@
             <div class="border-bottom pb-4 mb-4 d-lg-flex align-items-center justify-content-between">
               <div class="mb-2 mb-lg-0">
                 <h1 class="mb-0 h2 fw-bold">{{ __('Categories') }}</h1>
-                <!-- Breadcrumb -->
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="admin-dashboard.html">{{ __('Dashboard') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                    {{ __('Categories') }}
-                    </li>
-                  </ol>
-                </nav>
               </div>
               <!-- button -->
               <div>
@@ -40,7 +29,7 @@
                         <!-- Table Head -->
                         <thead class="table-light">
                           <tr>
-                            <th>{{ __('Category') }}</th>
+                            <th>{{ __('Title') }}</th>
                             <th>{{ __('Number of news') }}</th>
                             <th>{{ __('Status') }}</th>
                             <th>{{ __('Actions') }}</th>

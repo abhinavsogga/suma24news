@@ -21,7 +21,9 @@ use App\Http\Controllers\UserVisitController;
 
 // Admin
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', function () {
+        return redirect()->route('news.index');
+    });
 
     Route::resource('/users', UserController::class);
     Route::resource('/categories', CategoryController::class);

@@ -1,4 +1,4 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/commonMaster')
 
 @section('title', __('Edit Page'))
 
@@ -14,9 +14,6 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="admin-dashboard.html">{{ __('Dashboard') }}</a>
-                    </li>
                     <li class="breadcrumb-item">
                       <a href="{{route('pages.index')}}">Pages</a>
                     </li>

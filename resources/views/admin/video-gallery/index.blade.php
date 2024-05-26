@@ -1,7 +1,5 @@
-@extends('layouts/contentNavbarLayout')
-
+@extends('layouts/commonMaster')
 @section('title', 'Video Gallery')
-
 @section('content')
 <section class="container-fluid p-4">
         <div class="row ">
@@ -10,17 +8,6 @@
             <div class="border-bottom pb-4 mb-4 d-lg-flex align-items-center justify-content-between">
               <div class="mb-2 mb-lg-0">
                 <h1 class="mb-0 h2 fw-bold">{{ __('Video Gallery') }}</h1>
-                <!-- Breadcrumb -->
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="/">{{ __('Dashboard') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                    {{ __('Video Gallery') }}
-                    </li>
-                  </ol>
-                </nav>
               </div>
               <!-- button -->
               <div>

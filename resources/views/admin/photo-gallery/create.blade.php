@@ -1,13 +1,5 @@
-
-
-@extends('layouts/contentNavbarLayout')
-
+@extends('layouts/commonMaster')
 @section('title', __('Add News'))
-
-@section('page-script')
-{{ asset('assets/admin/js/vendors/editor.js') }}
-@endsection
-
 @section('content')
 <!-- Container fluid -->
 <div class="container-fluid p-4">

@@ -1,12 +1,6 @@
+@extends('layouts/commonMaster')
 
-
-@extends('layouts/contentNavbarLayout')
-
-@section('title', __('Add News'))
-
-@section('page-script')
-{{ asset('assets/admin/js/vendors/editor.js') }}
-@endsection
+@section('title', __('Add Category'))
 
 @section('content')
 <!-- Container fluid -->
@@ -21,9 +15,6 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="/">{{ __('Dashboard') }}</a>
-                    </li>
-                    <li class="breadcrumb-item">
                       <a href="{{ route('categories.index') }}">{{ __('Categories') }} </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
@@ -35,7 +26,7 @@
             </div>
           </div>
         </div>
-        <form id="formCategory" method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+        <form id="formCategory" method="POST" action="{{ route('categories.store') }}">
         @method('POST')
           @csrf
           @include('admin.categories.form')

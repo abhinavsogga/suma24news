@@ -1,10 +1,6 @@
-@extends('layouts/contentNavbarLayout')
+@extends('layouts/commonMaster')
 
-@section('title', __('Add News'))
-
-@section('page-script')
-{{ asset('assets/admin/js/vendors/editor.js') }}
-@endsection
+@section('title', __('Add Page'))
 
 @section('content')
 <!-- Container fluid -->
@@ -18,9 +14,6 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="admin-dashboard.html">Dashboard</a>
-                    </li>
                     <li class="breadcrumb-item">
                       <a href="{{ route('pages.index') }}">Pages </a>
                     </li>
@@ -37,7 +30,7 @@
         @method('POST')
           @csrf
           @include('admin.pages.form')
-          <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+          <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
       </form>
       </div>
 @endsection

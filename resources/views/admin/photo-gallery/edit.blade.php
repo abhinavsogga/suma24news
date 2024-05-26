@@ -1,13 +1,5 @@
-
-
-@extends('layouts/contentNavbarLayout')
-
+@extends('layouts/commonMaster')
 @section('title', __('Edit Photo'))
-
-@section('page-script')
-{{ asset('assets/admin/js/vendors/editor.js') }}
-@endsection
-
 @section('content')
 <!-- Container fluid -->
 <div class="container-fluid p-4">
@@ -39,7 +31,7 @@
                 @csrf
                 @method('PUT')
                 @include('admin.photo-gallery.form')
-                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                <button type="submit" class="btn btn-primary">{{ __('Update Photo') }}</button>
             </form>
       </div>
 @endsection

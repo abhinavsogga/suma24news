@@ -71,16 +71,9 @@
 
           <div class="col-12">
             <ul class="list-unstyled footer_nav">
-              <li><a href="#">Home</a></li> 
-              <li><a href="#">Sports</a></li>              
-              <li><a href="#">Biz-econ</a></li>
-              <li><a href="#">Education</a></li>
-              <li><a href="#">Culture  </a></li>
-              <li><a href="#">Entertainment</a></li>
-              <li><a href="#">Innovation</a></li>
-              <li><a href="#">International</a></li>
-              <li><a href="#">Politics</a></li>
-              <li><a href="#">About</a></li>
+              @foreach($navItems as $slug => $item)
+                <li><a href="{{ $item['url'] }}">{{ $item['label'] }}</a></li>
+              @endforeach
             </ul>
           </div>
         </div>

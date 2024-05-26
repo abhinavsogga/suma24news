@@ -150,7 +150,31 @@ input, img {outline: 0;}
 
 /* Breaking News Slider */
 .content-main { margin: 30px 0;}
-.slide-items img {width: 100%; height: auto;}
+/* .slide-items img {width: 100%; height: auto;} */
+
+.slide-items, .phpto-items {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 aspect ratio (9 / 16 * 100) */
+    overflow: hidden;
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        }
+}
+
+/* .slide-items img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+} */
+
 .slide-items::before { 
     content: '';
     width: 100%; height: 100%;

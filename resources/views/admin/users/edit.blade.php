@@ -29,10 +29,10 @@
             </div>
           </div>
         </div>
-        <form method="POST" action="{{ route('news.update', $news->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
           @method('PUT')
           @csrf
-          @include('admin.news.form', ['categories' => $categories])
+          @include('admin.users.form')
           <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
       </form>
       </div>

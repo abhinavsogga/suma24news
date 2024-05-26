@@ -14,17 +14,6 @@
             <div class="border-bottom pb-4 mb-4 d-lg-flex align-items-center justify-content-between">
               <div class="mb-2 mb-lg-0">
                 <h1 class="mb-0 h2 fw-bold">News </h1>
-                <!-- Breadcrumb -->
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="admin-dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                      News
-                    </li>
-                  </ol>
-                </nav>
               </div>
               <!-- button -->
               <div>
@@ -58,7 +47,7 @@
                           @foreach ($news as $item)
                           <tr>
                             <td>
-                              <a href="#" class="text-inherit">
+                              <a href="{{ route('news.edit', $item->id) }}" class="text-inherit">
                                 <div class="d-lg-flex align-items-center">
                                   <div>
                                     <img src="{{ asset('/storage/' . $item->image) }}" alt=""

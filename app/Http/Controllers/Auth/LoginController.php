@@ -40,9 +40,9 @@ class LoginController extends Controller
 
             // Check if the user is an admin
             if (Auth::user()->hasRole('admin')) {
-                return redirect()->intended('admin/dashboard');
+                return redirect()->route('news.index');
             } else {
-                return redirect()->intended('/');
+                return redirect()->route('home');
             }
         }
 

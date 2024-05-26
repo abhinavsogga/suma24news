@@ -1,13 +1,5 @@
-
-
-@extends('layouts/contentNavbarLayout')
-
+@extends('layouts/commonMaster')
 @section('title', __('Add Video'))
-
-@section('page-script')
-{{ asset('assets/admin/js/vendors/editor.js') }}
-@endsection
-
 @section('content')
 <!-- Container fluid -->
 <div class="container-fluid p-4">
@@ -20,9 +12,6 @@
                 <!-- Breadcrumb -->
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                      <a href="/">{{ __('Dashboard') }}</a>
-                    </li>
                     <li class="breadcrumb-item">
                       <a href="{{ route('video-gallery.index') }}">{{ __('Video Gallery') }} </a>
                     </li>

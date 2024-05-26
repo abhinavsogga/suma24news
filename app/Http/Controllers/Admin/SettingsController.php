@@ -32,7 +32,7 @@ class SettingsController extends Controller
         // Validate the input
         $request->validate([
             'settings.live_streaming.title' => 'required|string|max:255',
-            'settings.live_streaming.poster' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'settings.live_streaming.poster' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'settings.live_streaming.url' => 'required|url',
         ]);
 

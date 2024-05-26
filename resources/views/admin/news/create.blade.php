@@ -25,9 +25,6 @@
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="{{ route('dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="breadcrumb-item">
                       <a href="{{ route('news.index') }}">News </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
@@ -43,7 +40,7 @@
         @method('POST')
           @csrf
           @include('admin.news.form')
-          <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+          <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
       </form>
       </div>
 @endsection

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
-
+use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     /**
@@ -52,9 +52,13 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        
+
+// Get all roles
+$roles = Role::all();
         $user = User::findOrFail($id);
 
-        return view('admin.user.edit', compact('user'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**

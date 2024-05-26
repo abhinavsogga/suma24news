@@ -57,7 +57,7 @@ class NewsController extends Controller
         $validatedData['user_id'] = auth()->id();
 
         $news = News::create($validatedData);
-        event(new Newscreated());
+        //event(new Newscreated());
 
         return redirect()->route('news.index')
             ->with('success', 'News created successfully.');
