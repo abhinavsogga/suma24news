@@ -39,4 +39,8 @@ class ContentController extends Controller
             'page' => $page,
         ]);
 	}
+
+    public function showAboutPage() {
+		return view('front.about_suma');
+	}
 }

@@ -58,7 +58,7 @@
                   <div class="col-md-6 mb-3 mb-md-0">
                     <div class="news_summary">
                       <h3 class="h2"><a href="{{ route('content.newsDetails', $featured->slug) }}">{{ $featured->title }}</a></h3>
-                      <p>{{ $featured->long_excerpt }}</p>
+                      <p>{!! $featured->long_excerpt !!}</p>
                       <span class="post-by">By {{$featured->user->name}}</span>
                     </div>
                   </div>
@@ -71,19 +71,11 @@
           <aside class="col-lg-4 sidebar_rht mt-0 mt-md-2">
             <h2 class="h5 text-uppercase title_h2">Latest News</h2>
             <div class="d-flex mt-4 mb-4 gap-2">
-              <input type="date" class="form-control">
-              <button class="btn btn-md btn-yellow"> search </button>
+              <input type="date" id="filter_date" class="form-control">
+              <button id="filter_btn" class="btn btn-md btn-yellow"> Search </button>
             </div>
-            <ul class="list-unstyled latest_news m-0">
-              @foreach($latestNews as $latest)
-                <li class="d-flex align-items-center">
-                  <figure><img src="{{ asset('/storage/' . $latest->image) }}" alt="News" width="127"/>
-                  </figure>
-                  <div class="news_summary">
-                    <h3 class="h6"><a href="{{ route('content.newsDetails', $latest->slug) }}">{{$latest->title}}</a></h3>
-                  </div>
-                </li>
-              @endforeach
+            <ul id="latest_news_container" class="list-unstyled latest_news m-0">
+                @include('front.components.news.list', ['newsItems' => $latestNews])
             </ul>
           </aside>
 
@@ -104,7 +96,7 @@
                 <figure class="mb-4"><img src="{{ asset('/storage/' . $education->image) }}" alt="Education" height="220" class="w-100 object-fit-cover"/></figure>
                 <div class="text-center news_content">
                   <h3 class="h4 position-relative"><a href="{{ route('content.newsDetails', $education->slug) }}">{{ $education->title }}</a></h3>
-                  <p>{{ $education->excerpt }}</p>
+                  <p>{!! $education->excerpt !!}</p>
                 </div>
               </div>
             @endforeach
@@ -128,7 +120,7 @@
                                 <div class="col-md-6 mb-3 mb-md-0">
                                     <div class="news_summary">
                                         <h3 class="h2"><a href="{{ route('content.newsDetails', $politicsNews[0]->slug) }}">{{ $politicsNews[0]->title }}</a></h3>
-                                        <p>{{ $politicsNews[0]->excerpt }}</p>
+                                        <p>{!! $politicsNews[0]->excerpt !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -138,27 +130,13 @@
 
                     <aside class="col-lg-3 sidebar_rht mt-0 pt-0 mt-md-2">
                         <ul class="list-unstyled latest_news m-0">
-                            @foreach ($politicsNews->skip(1)->take(3) as $politics)
-                            <li class="d-flex align-items-center border-0">
-                                <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127" ></figure>
-                                <div class="news_summary">
-                                    <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
-                                </div>
-                            </li>
-                            @endforeach
+                            @include('front.components.news.list', ['newsItems' => $politicsNews->skip(1)->take(3), 'class' => 'border-0'])
                         </ul>
                     </aside>
 
                     <aside class="col-lg-3 sidebar_rht mt-0 mt-md-2 pt-0">
                         <ul class="list-unstyled latest_news m-0">
-                            @foreach ($politicsNews->skip(4)->take(3) as $politics)
-                            <li class="d-flex align-items-center border-0">
-                                <figure><img src="{{ asset('/storage/' . $politics->image) }}" alt="News" width="127"></figure>
-                                <div class="news_summary">
-                                    <h3 class="h6"><a href="{{ route('content.newsDetails', $politics->slug) }}">{{ $politics->title }}</a></h3>
-                                </div>
-                            </li>
-                            @endforeach
+                            @include('front.components.news.list', ['newsItems' => $politicsNews->skip(4)->take(3), 'class' => 'border-0'])
                         </ul>
                     </aside>
                 </div>
@@ -178,7 +156,7 @@
               <div class="text-center news_content">
                 <h3 class="h4 position-relative"><a href="{{ route('content.newsDetails', $entertainment->slug) }}">{{ $entertainment->title }}</a></h3>
                 <p>
-                    {{ $entertainment->excerpt }}
+                    {!! $entertainment->excerpt !!}
                 </p>
               </div>
             </div>
@@ -195,43 +173,21 @@
             <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
               <h2 class="h5 text-uppercase title_h2">Culture</h2>
               <ul class="list-unstyled latest_news m-0">
-                @foreach($cultureNews as $culture)
-                  <li class="d-flex align-items-center">
-                    <figure><img src="{{ asset('/storage/' . $culture->image) }}" alt="News" width="127"/>
-                    </figure>
-                    <div class="news_summary">
-                      <h3 class="h6"><a href="{{ route('content.newsDetails', $culture->slug) }}">{{$culture->title}}</a></h3>
-                    </div>
-                  </li>
-                @endforeach
+                @include('front.components.news.list', ['newsItems' => $cultureNews])
               </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
               <h2 class="h5 text-uppercase title_h2">International</h2>
               <ul class="list-unstyled latest_news m-0">
-                @foreach($internationalNews as $international)
-                  <li class="d-flex align-items-center">
-                  <figure><img src="{{ asset('/storage/' . $international->image) }}" alt="News" width="127"/></figure>
-                  <div class="news_summary">
-                    <h3 class="h6"><a href="{{ route('content.newsDetails', $international->slug) }}">{{$international->title}}</a></h3>
-                  </div>
-                  </li>
-                @endforeach
+                @include('front.components.news.list', ['newsItems' => $internationalNews])
               </ul>
             </div>
 
             <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
               <h2 class="h5 text-uppercase title_h2">Future</h2>
               <ul class="list-unstyled latest_news m-0">
-                @foreach($futureNews as $future)
-                  <li class="d-flex align-items-center">
-                  <figure><img src="{{ asset('/storage/' . $future->image) }}" alt="News" width="127"/></figure>
-                  <div class="news_summary">
-                    <h3 class="h6"><a href="{{ route('content.newsDetails', $future->slug) }}">{{$future->title}}</a></h3>
-                  </div>
-                  </li>
-                @endforeach
+                @include('front.components.news.list', ['newsItems' => $futureNews])
               </ul>
             </div>
           </div>
@@ -246,7 +202,7 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-8 photo_gallery mb-3 mb-md-0">
-              <h2 class="h5 text-uppercase title_h2">Photo gallery </h2>
+              <h2 class="h5 text-uppercase title_h2">Photo gallery</h2>
               <div class="slider-for d1">
                 @foreach($photos as $photo)
                 <div class="photo-items"><img src="{{ asset('storage/' . $photo->image_path) }}" alt="Photo" width="796"
@@ -272,23 +228,12 @@
 
                   <figure class="position-relative">
                     <a href="{{ $video->video_url }}"><img src="{{ asset('storage/' . $video->cover_photo) }}" alt="{{ $video->title }}" width="127">
-                    <button class="play_icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_6_248)">
-                          <path
-                            d="M16 0C20.2435 0 24.3131 1.68571 27.3137 4.68629C30.3143 7.68687 32 11.7565 32 16C32 20.2435 30.3143 24.3131 27.3137 27.3137C24.3131 30.3143 20.2435 32 16 32C11.7565 32 7.68687 30.3143 4.68629 27.3137C1.68571 24.3131 0 20.2435 0 16C0 11.7565 1.68571 7.68687 4.68629 4.68629C7.68687 1.68571 11.7565 0 16 0ZM3 16C3 19.4478 4.36964 22.7544 6.80761 25.1924C9.24558 27.6304 12.5522 29 16 29C19.4478 29 22.7544 27.6304 25.1924 25.1924C27.6304 22.7544 29 19.4478 29 16C29 12.5522 27.6304 9.24558 25.1924 6.80761C22.7544 4.36964 19.4478 3 16 3C12.5522 3 9.24558 4.36964 6.80761 6.80761C4.36964 9.24558 3 12.5522 3 16ZM12.758 10.454L21.286 15.572C21.3597 15.6165 21.4207 15.6793 21.463 15.7543C21.5053 15.8293 21.5275 15.9139 21.5275 16C21.5275 16.0861 21.5053 16.1707 21.463 16.2457C21.4207 16.3207 21.3597 16.3835 21.286 16.428L12.758 21.546C12.6822 21.5917 12.5956 21.6164 12.507 21.6177C12.4185 21.6189 12.3313 21.5966 12.2542 21.5531C12.1771 21.5096 12.1129 21.4464 12.0683 21.3699C12.0236 21.2935 12.0001 21.2065 12 21.118V10.884C11.9997 10.7953 12.023 10.7081 12.0675 10.6314C12.112 10.5547 12.1761 10.4912 12.2533 10.4474C12.3304 10.4036 12.4178 10.3812 12.5065 10.3823C12.5952 10.3835 12.682 10.4082 12.758 10.454Z"
-                            fill="white" />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_6_248">
-                            <rect width="32" height="32" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </button>
+                        <button class="play_icon">
+                            @include('front.components.icons.play')
+                        </button>
                     </a>
                   </figure>
-                  
+
                   <div class="news_summary" bis_skin_checked="1">
                     <h3 class="h6">{{ $video->title }}</h3>
                   </div>
@@ -338,12 +283,28 @@
 
 @section('page-scripts')
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
     $('.video-sidebar').magnificPopup({
       delegate: 'a', // child items selector, by clicking on it popup will open
       type: 'iframe'
     });
-  });
+
+    $('#filter_btn').click(function() {
+        const date = $('#filter_date').val();
+
+        $.ajax({
+            url: '{{ route("latest-news") }}',
+            type: 'GET',
+            data: { date: date },
+            success: function(response) {
+                $('#latest_news_container').html(response.html);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+});
 </script>
 <script src="{{ asset('assets/libs/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
 @endsection

@@ -208,7 +208,7 @@ input, img {outline: 0;}
     background-color: var(--black-color);
     width: 40px; height: 1px;
     display: block;
-    margin: 20px auto;
+    margin: 15px auto;
 }
 
 /* Entertainment news */
@@ -312,6 +312,9 @@ input, img {outline: 0;}
 
 /* single-news */
 .news_content p{font-size: 1.1rem;}
+.news_content a:hover{
+    color: var(--black-color);
+}
 .object-fit-cover{object-fit: cover;}
 .like-deslike{
      cursor: pointer;

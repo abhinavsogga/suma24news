@@ -2,10 +2,9 @@
 <div class="content-main">
       <div>
         <div class="container">
-          <h2 class="h5 text-uppercase title_h2">{{ $page->title }}</h2>
-
+          <!-- <h2 class="h5 text-uppercase title_h2">{{ $page->title }}</h2> -->
           <div class="row">
-            {{ $page->description }}
+            {!! $page->description !!}
           </div>
         </div>
 

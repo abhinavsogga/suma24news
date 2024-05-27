@@ -109,12 +109,17 @@ class News extends Model
         return $query;
     }
 
-    public function getLatestNews(int $priorityCategoryId = 0, int $limit = 10)
+    public function getLatestNews(int $priorityCategoryId = 0, int $limit = 10, ?string $date = null)
     {
-        return $this->getNewsQuery($priorityCategoryId)
-            ->latest()
-            ->take($limit)
-            ->get();
+        $query = $this->getNewsQuery($priorityCategoryId)
+                    ->latest()
+                    ->take($limit);
+
+        if ($date) {
+            $query->whereDate('created_at', '=', $date);
+        }
+
+        return $query->get();
     }
 
     public function getLatestByCategory(string $slug, int $limit = 4)

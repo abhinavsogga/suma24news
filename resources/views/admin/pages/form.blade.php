@@ -16,7 +16,7 @@
           <!-- input -->
         <div class="mb-3">
           <label class="form-label" for="description">{{ __('Description') }}</label>
-          <input type="hidden" id="description" name="description" value="{!! old('description', $page->description ?? '') !!}"/>
+          <input type="hidden" id="description" name="description" value=""/>
           <div id="editor" class="mb-3">{!! old('description', $page->description ?? '') !!}</div>
         </div>
         <div class="mb-3">

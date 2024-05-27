@@ -1,5 +1,5 @@
 @extends('layouts/commonMaster')
-@section('title', 'News')
+@section('title', 'Users')
 
 @section('page-styles')
 <link href="{{ asset('assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
@@ -37,6 +37,7 @@
                           <th>Name</th>
                           <th>Email</th>
                           <th>Role</th>
+                          <th>Most Visited Category</th>
                           <th>Created At</th>
                           <th>Actions</th>
                           </tr>
@@ -49,6 +50,7 @@
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
                           <td>{{ ucfirst($user->role) }}</td>
+                          <td>{{ $user->mostVisitedCategory }}</td>
                           <td>{{ $user->created_at }}</td>
                             <td>
                               <span class="dropdown dropstart">

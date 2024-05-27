@@ -32,16 +32,24 @@ class HomeController extends Controller
         return view('front.index', $this->getHomePageData($request));
     }
 
+    public function getLatestNews(Request $request)
+    {
+        $mostVisitedCategory = $this->getMostVisitedCategory($request);
+        $date = $request->query('date');
+        $newsItems = $this->news->getLatestNews($mostVisitedCategory, 6, $date);
+
+        // Render the view and capture its content and return JSON response
+        $view = view('front.components.news.list', compact('newsItems'))->render();
+        return response()->json(['html' => $view]);
+    }
+
     private function getHomePageData($request): array
     {
         $liveStreamingSettings = json_decode(Setting::where('key', 'live_streaming_settings')->value('value'), true);
         $photos = PhotoGallery::all();
         $videos = VideoGallery::latest()->take(4)->get();
 
-        $userId = Auth::id();
-        $guestId = $request->cookie('guest_id') ?? Str::uuid();
-
-        $mostVisitedCategory = (int) User::getMostVisitedCategory($userId, $guestId);
+        $mostVisitedCategory = $this->getMostVisitedCategory($request);
 
         return [
             'breakingNews' => $this->news->getLatestBreakingNews($mostVisitedCategory),
@@ -57,5 +65,14 @@ class HomeController extends Controller
             'photos' => $photos,
             'videos' => $videos
         ];
+    }
+
+    private function getMostVisitedCategory($request)
+    {
+        $userId = Auth::id();
+        $guestId = $request->cookie('guest_id');
+
+        $mostVisitedCategory = $userId || $guestId ? (int) User::getMostVisitedCategory($userId, $guestId) : 0;
+        return $mostVisitedCategory;
     }
 }

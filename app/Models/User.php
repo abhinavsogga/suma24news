@@ -6,6 +6,8 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 
+use app\Models;
+
 class User extends Authenticatable
 {
     use HasRoles, Notifiable;
@@ -49,6 +51,31 @@ class User extends Authenticatable
     {
         // Get the user's role name or return null if the user has no roles
         return $this->roles->isEmpty() ? null : $this->roles->first()->name;
+    }
+
+    public function getMostVisitedCategoryAttribute()
+    {
+        $builder = UserVisit::where('user_id', $this->id);
+
+        $mostVisitedCategory =
+            $builder
+            ->select('category_id', DB::raw('SUM(time_spent) as total'))
+            ->groupBy('category_id')
+            ->orderByDesc('total')
+            ->first();
+
+        $mostVisitedCategory = $builder
+            ->select('categories.title as category_title', 'category_id', DB::raw('SUM(time_spent) as total'))
+            ->join('categories', 'categories.id', '=', 'user_visits.category_id')
+            ->groupBy('category_id', 'categories.title')
+            ->orderByDesc('total')
+            ->first();
+
+        if(isset($mostVisitedCategory->category_id) && $mostVisitedCategory->category_id > 0) {
+            return $mostVisitedCategory->category_title . ' '. $mostVisitedCategory->total . ' seconds';
+        }
+
+        return '';
     }
 
     public static function getMostVisitedCategory($userId = null, $guestId = null)

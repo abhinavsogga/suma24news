@@ -48,7 +48,7 @@
              <!-- Nav item -->
              <li class="nav-item">
                  <a class="nav-link" href="{{ route('pages.index') }}">
-                     <i class="nav-icon fe fe-file me-2"></i> Pages
+                     <i class="nav-icon fe fe-file me-2"></i> About Suma
                  </a>
              </li>
 
@@ -81,6 +81,12 @@
              <li class="nav-item">
                  <a class="nav-link" href="{{ route('users.index') }}">
                      <i class="nav-icon fe fe-user me-2"></i> Users
+                 </a>
+             </li>
+
+             <li class="nav-item">
+                 <a class="nav-link" href="{{ route('user.visit') }}">
+                     <i class="nav-icon fe fe-user me-2"></i> User Visits
                  </a>
              </li>
 

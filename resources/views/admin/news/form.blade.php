@@ -16,7 +16,7 @@
           <!-- input -->
         <div class="mb-3">
           <label class="form-label" for="description">{{ __('Description') }}</label>
-          <input type="hidden" id="description" name="description" value="{!! old('description', $news->description ?? '') !!}"/>
+          <input type="hidden" id="description" name="description" value=""/>
           <div id="editor" class="mb-3">{!! old('description', $news->description ?? '') !!}</div>
         </div>
         <div class="mb-3">
@@ -49,11 +49,6 @@
                 @endforeach
             </select>
         </div>
-          <!-- tag -->
-          <div class="mb-3">
-                <label class="form-label" for="tags">{{ __('Tags') }}</label>
-                <input type="text" name="tags" value="{{old('tags', $news->tags ?? '')}}" class="form-control">
-            </div>
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" value="1" id="is_breaking" name="is_breaking" {{ old('is_breaking', $news->is_breaking ?? 0) == 1 ? 'checked' : '' }}>
                 <label class="form-check-label" for="is_breaking">

@@ -46,9 +46,9 @@
             </div>
 
             <div class="col-md-5 d-none d-md-block">
-              <form>
+              <form method="GET" action="{{ route('search') }}">
                 <div class="search-box">
-                  <input class="input-search" type="text" placeholder="Search News" />
+                  <input class="input-search" name="q" type="text" placeholder="Search News" value="{{ $query ?? '' }}"/>
                 </div>
               </form>
             </div>

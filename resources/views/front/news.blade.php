@@ -9,16 +9,7 @@
 					</figure>
 					<div class="news_content">
 						<h2 class="h2">{{ $news->title }}</h2>
-						<p>{{ $news->description }}</p>
-						<!-- <p>Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p>
-						<p>Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p>
-						<p>My hero when I was a kid was my mom. Same for everyone I knew. Moms are untouchable. They’re elegant, smart, beautiful, kind…everything we want to be. At 29 years old, my favorite compliment is being told that I look like my mom. Seeing myself in her image, like this daughter up top, makes me so proud of how far I’ve come, and so thankful for where I come from. the refractor telescope uses a convex lens to focus the light on the eyepiece. The reflector telescope has a concave lens which means it telescope sits on. </p>
-						<p>The mount is the actual tripod and the wedge is the device that lets you attach the telescope to the mount. Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p>
-						<h3 class="h3 mt-4">Restored drawings by famous artist go on display</h3>
-						<p>Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p>
-						<p>Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p>
-						<p>My hero when I was a kid was my mom. Same for everyone I knew. Moms are untouchable. They’re elegant, smart, beautiful, kind…everything we want to be. At 29 years old, my favorite compliment is being told that I look like my mom. Seeing myself in her image, like this daughter up top, makes me so proud of how far I’ve come, and so thankful for where I come from. the refractor telescope uses a convex lens to focus the light on the eyepiece. The reflector telescope has a concave lens which means it telescope sits on. </p>
-						<p>The mount is the actual tripod and the wedge is the device that lets you attach the telescope to the mount. Moms are like…buttons? Moms are like glue. Moms are like pizza crusts. Moms are the ones who make sure things happen—from birth to school lunch.</p> -->
+						<p>{!! $news->description !!}</p>
 					</div>
 					<hr>
 					<div class="like-deslike d-flex gap-3">
@@ -40,7 +31,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="sidebar_image">
-					<img src="../assets/img/news/news_card.jpg" class="w-100" />
+					<img src="{{ asset('/assets/img/news_card.jpg') }}" class="w-100" />
 				</div>
 			</div>
 		</div>
