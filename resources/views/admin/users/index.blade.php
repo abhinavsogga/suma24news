@@ -37,7 +37,6 @@
                           <th>Name</th>
                           <th>Email</th>
                           <th>Role</th>
-                          <th>Most Visited Category</th>
                           <th>Created At</th>
                           <th>Actions</th>
                           </tr>
@@ -50,7 +49,6 @@
                           <td>{{ $user->name }}</td>
                           <td>{{ $user->email }}</td>
                           <td>{{ ucfirst($user->role) }}</td>
-                          <td>{{ $user->mostVisitedCategory }}</td>
                           <td>{{ $user->created_at }}</td>
                             <td>
                               <span class="dropdown dropstart">

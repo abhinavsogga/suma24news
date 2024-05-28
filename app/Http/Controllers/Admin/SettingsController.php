@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreSocialMediaSettings;
 
 class SettingsController extends Controller
 {
@@ -17,8 +18,9 @@ class SettingsController extends Controller
     {
         // Retrieve the live streaming settings
         $liveStreamingSettings = json_decode(Setting::where('key', 'live_streaming_settings')->value('value'), true);
+        $socialMediaSettings = json_decode(Setting::where('key', 'social_media_settings')->value('value'), true);
 
-        return view('admin.settings', compact('liveStreamingSettings'));
+        return view('admin.settings', compact('liveStreamingSettings', 'socialMediaSettings'));
     }
 
     /**
@@ -27,7 +29,7 @@ class SettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request)
+    public function updateLiveStreamingSettings(Request $request)
     {
         // Validate the input
         $request->validate([
@@ -61,6 +63,18 @@ class SettingsController extends Controller
 
         // Update or create the setting in the database
         Setting::updateOrCreate(['key' => 'live_streaming_settings'], ['value' => $settingsJson]);
+
+        return redirect()->back()->with('success', 'Settings updated successfully.');
+    }
+
+    public function updateSocialMediaSettings(StoreSocialMediaSettings $request)
+    {
+        $settingsData = $request->input('settings.social_media');
+        // Convert settings data to JSON
+        $settingsJson = json_encode($settingsData);
+
+        // Update or create the setting in the database
+        Setting::updateOrCreate(['key' => 'social_media_settings'], ['value' => $settingsJson]);
 
         return redirect()->back()->with('success', 'Settings updated successfully.');
     }

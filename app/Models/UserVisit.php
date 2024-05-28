@@ -22,4 +22,20 @@ class UserVisit extends Model
         'time_spent',
         'visited_at',
     ];
+
+    /**
+     * Define a belongsTo relationship with the User model.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Define a belongsTo relationship with the Category model.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

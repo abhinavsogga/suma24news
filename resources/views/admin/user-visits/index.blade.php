@@ -13,7 +13,7 @@
             <!-- Page header -->
             <div class="border-bottom pb-4 mb-4 d-lg-flex align-items-center justify-content-between">
               <div class="mb-2 mb-lg-0">
-                <h1 class="mb-0 h2 fw-bold">User Visits </h1>
+                <h1 class="mb-0 h2 fw-bold">User Visits</h1>
               </div>
             </div>
 
@@ -29,20 +29,33 @@
                         <!-- Table Head -->
                         <thead class="table-light">
                           <tr>
-                          <th>ID</th>
                           <th>Name</th>
                           <th>Email</th>
-                          <th>Most Visited Category</th>
+                          <th>Categories Visited</th>
                           </tr>
                         </thead>
                         <tbody>
                           <!-- Table body -->
-                          @foreach ($visits as $visit)
-                          <tr>
-                          <td>{{ $visit->id }}</td>
-                          <td>{{ $visit->id }}</td>
-                          <td>{{ $visit->id }}</td>
-                          <td>{{ $visit->id }}</td>
+                          @foreach ($groupedVisits as $groupVisit)
+                            <tr>
+                                <td>{{ optional($groupVisit->first()->user)->name ?? 'Guest' }}</td>
+                                <td>{{ optional($groupVisit->first()->user)->email ?? 'N/A' }}</td>
+                                <td>
+                                    @foreach($groupVisit as $visit)
+                                    <p class="mb-1">
+                                    <span class="badge
+                                        @if ($loop->first) bg-success
+                                        @elseif ($loop->iteration == 2) bg-info
+                                        @elseif ($loop->iteration == 3) bg-warning
+                                        @else bg-secondary
+                                        @endif">
+                                        {{ $visit->category->title }}
+                                    </span>
+                                      {{ (int) $visit->total_time_spent }}s
+                                    </p>
+                                    @endforeach
+                                </td>
+                            </tr>
                           @endforeach
                         </tbody>
                       </table>

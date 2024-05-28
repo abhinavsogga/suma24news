@@ -34,7 +34,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::resource('/video-gallery', VideoGalleryController::class);
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
-    Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
+    Route::post('/settings', [SettingsController::class, 'updateLiveStreamingSettings'])->name('settings.live_streaming.update');
+    Route::post('/settings/social-media', [SettingsController::class, 'updateSocialMediaSettings'])->name('settings.social_media.update');
 
     Route::delete('/notifications/{notification}', [AdminNotificationController::class, 'delete'])->name('notifications.delete');
     Route::post('/notifications/{notification}/mark-as-read', [AdminNotificationController::class, 'markAsRead'])->name('notifications.mark-as-read');
