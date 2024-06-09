@@ -1,15 +1,9 @@
-@extends('layouts/contentNavbarLayout')
-
+@extends('layouts/commonMaster')
 @section('title', __('Add News'))
 
 @section('page-script')
 <script src="{{ asset('assets/libs/quill/quill.min.js') }}"></script>
 <script src="{{ asset('assets/admin/js/vendors/editor.js') }}"></script>
-<script src="{{ asset('assets/libs/tagify/tagify.min.js') }}"></script>
-@endsection
-
-@section('page-style')
-<link href="asset('assets/libs/tagify/tagify.css') }}" rel="stylesheet">
 @endsection
 
 @section('content')
