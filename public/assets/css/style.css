@@ -112,7 +112,7 @@ input, img {outline: 0;}
 .input-search{
     font-size: 15px; line-height: 1.1; border: none;
     background: var(--bs-white); 
-    background-image: url(../images/icons/search_icon.svg);
+    background-image: url(../img/icons/search_icon.svg);
     background-repeat: no-repeat;
     background-position: 10px center;
     background-size: 20px 20px;    
@@ -139,7 +139,7 @@ input, img {outline: 0;}
 .navbar .navbar-nav li a { color: var(--bs-white); font-size: 15px; padding: 10px 1rem; text-transform: uppercase; font-weight: 600;}
 .navbar-nav li a:hover, .navbar-nav li a:focus, .navbar-nav li a:visited {text-decoration: none;}
 @media (min-width:1440px){
-    .navbar .navbar-nav .nav-item a {padding-inline: 1.30rem;}
+    .navbar .navbar-nav .nav-item a {padding-inline: 1.10rem;}
 }
 @media (max-width:1200px){
     .navbar .navbar-collapse { max-height: calc(100vh - 52px); overflow-y: auto;}
@@ -312,9 +312,8 @@ input, img {outline: 0;}
 
 /* single-news */
 .news_content p{font-size: 1.1rem;}
-.news_content a:hover{
-    color: var(--black-color);
-}
+.news_content a:hover{color: var(--black-color);}
+.entertainment_news .news_content a:hover{color: var(--grey-color-500);}
 .object-fit-cover{object-fit: cover;}
 .like-deslike{
      cursor: pointer;

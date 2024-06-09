@@ -44,14 +44,6 @@
 									required>
 							</div>
 								<!-- Checkbox -->
-							<div class="mb-3">
-								<div class="form-check">
-									<input type="checkbox" class="form-check-input" id="agreeCheck">
-									<label class="form-check-label" for="agreeCheck"><span>I agree to the <a href="terms-condition-page.html">Terms of
-												Service </a>and
-											<a href="terms-condition-page.html">Privacy Policy.</a></span></label>
-								</div>
-							</div>
 							<div>
 									<!-- Button -->
 									<div class="d-grid">

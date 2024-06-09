@@ -25,9 +25,9 @@
           </div>
 
           <div class="col-12">
-            <ul class="list-unstyled footer_nav">
+            <ul class="list-unstyled footer_nav notranslate">
               @foreach($navItems as $slug => $item)
-                <li><a href="{{ $item['url'] }}">{{ $item['label'] }}</a></li>
+                <li><a href="{{ $item['url'] }}">{{ __($item['label']) }}</a></li>
               @endforeach
             </ul>
           </div>
@@ -51,7 +51,33 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 
   <script src="{{ asset('assets/js/main.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      const csrfToken = '{{ csrf_token() }}';
+
+      $('.dropdown-item').on('click', function(e) {
+          e.preventDefault();
+          const locale = $(this).data('lang');
+          $.ajax({
+              url: '/language/' + locale,
+              headers: {
+                'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the headers
+            },
+              type: 'POST',
+              success: function(response) {
+                  location.reload();
+              },
+              error: function(xhr, status, error) {
+                  // Handle error response
+                  console.error(error);
+              }
+          });
+      });
+  });
+
+  </script>
   @yield('page-scripts')
+  
 </body>
 
 </html>

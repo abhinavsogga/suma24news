@@ -38,7 +38,7 @@
                   <label class="form-check-label " for="rememberme">Remember me</label>
                 </div>
                 <div>
-                  <a href="/">Forgot your password?</a>
+                  <a href="{{ route('reset-password') }}">Forgot your password?</a>
                 </div>
               </div>
               <div>

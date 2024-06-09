@@ -24,6 +24,7 @@
           <h5 class="mb-1">{{ __('Image') }}</h5>
             <!-- input -->
             <input type="file" name="image" class="form-control"/>
+            <p class="mb-0 mt-2"><i>To enhance the visual presentation, kindly upload an image with dimensions of 1080x606 pixels.</i></p>
             @if(isset($news->image))
                 <img src="{{ Storage::url($news->image) }}" class="mt-3" alt="Poster" style="max-width: 200px;">
             @endif
@@ -61,6 +62,10 @@
                 {{ __('Is Featured News') }}
                 </label>
             </div>
+            <!-- <div class="mb-3">
+              <label class="form-label">{{ __('News Date') }}</label>
+              <input type="text" name="created_at" value="{{old('created_at', $news->created_at ?? '')}}" class="form-control calendar">
+            </div> -->
             <div class="mb-3">
                 <label class="form-label" for="status">{{ __('Status') }}</label>
                 <select name="status" id="status" class="form-select">

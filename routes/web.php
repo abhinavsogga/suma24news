@@ -56,13 +56,24 @@ Route::middleware(['guest'])->prefix('auth')->group(function () {
 });
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::controller(ContentController::class)->group(function () {
+Route::middleware(['set_locale'])->controller(ContentController::class)->group(function () {
     Route::get('/categories/{category}', 'listNews')->name('content.listNews')->middleware('track_user_visits');
     Route::get('/news/{slug}', 'showNewsDetails')->name('content.newsDetails')->middleware('track_user_visits');
     Route::get('/pages/{slug}', 'showPage')->name('content.page')->middleware('track_user_visits');
 });
 
 // front
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('track_user_visits');
+Route::middleware(['set_locale'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('track_user_visits');
+    Route::get('/search', [SearchController::class, 'index'])->name('search')->middleware('track_user_visits');
+});
+
 Route::get('/latest-news', [HomeController::class, 'getLatestNews'])->name('latest-news');
-Route::get('/search', [SearchController::class, 'index'])->name('search')->middleware('track_user_visits');
+
+Route::post('language/{locale}', function (Request $request, $locale) {
+    if (in_array($locale, config('app.locales'))) {
+        App::setLocale($locale);
+        session()->put('locale', $locale);
+    }
+    return response()->json(['locale' => $locale]);
+});

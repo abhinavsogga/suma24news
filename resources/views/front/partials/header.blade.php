@@ -28,7 +28,7 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ asset('assets/fonts/fonts.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" re="preload">
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css?v=1.0') }}" re="preload">
   <link rel="stylesheet" href="{{ asset('assets/libs/magnific-popup/magnific-popup.css') }}">
 </head>
 
@@ -58,12 +58,47 @@
                 <div class="dropdown lang_drop">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    EN
+                    {{ strtoupper(app()->getLocale() ?? 'EN') }}
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">English</a></li>
-                    <li><a class="dropdown-item" href="#">Turkish</a></li>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="custom_translate_element">
+                    <li><a class="dropdown-item {{ app()->getLocale() == 'en' ? 'active' : '' }}" href="javascript:void(0);" data-lang="en">English</a></li>
+                    <li><a class="dropdown-item {{ app()->getLocale() == 'tr' ? 'active' : '' }}" href="javascript:void(0);" data-lang="tr">Turkish</a></li>
+                    <li><a class="dropdown-item {{ app()->getLocale() == 'fr' ? 'active' : '' }}" href="javascript:void(0);" data-lang="fr">French</a></li>
+                    <!-- Add more options as needed -->
                   </ul>
+
+                  <style>
+                    #google_translate_element {display: none;}
+                    .skiptranslate {display: none !important;}
+                    body {top: 0 !important;}
+                  </style>
+                  <div id="google_translate_element"></div>
+
+                  <script type="text/javascript">
+                    function googleTranslateElementInit() {
+                      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                    }
+                  </script>
+
+                  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+                  <script type="text/javascript">
+                    document.querySelectorAll('#custom_translate_element .dropdown-item').forEach(function(element) {
+                      element.addEventListener('click', function() {
+                        var language = this.getAttribute('data-lang');
+                        if (language) {
+                          var translateDropdown = document.querySelector('.goog-te-combo');
+                          if (translateDropdown) {
+                            translateDropdown.value = language;
+                            // Simulate a change event on the dropdown to trigger the translation
+                            var event = new Event('change');
+                            translateDropdown.dispatchEvent(event);
+                          }
+                        }
+                      });
+                    });
+                  </script>
+                
                 </div>
                 @if (Auth::check())
                   <div class="d-flex btn_group">
@@ -95,7 +130,7 @@
             </button>
           </div>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0 w-100 justify-content-center">
+            <ul class="navbar-nav mb-2 mb-lg-0 w-100 justify-content-center notranslate">
               
               <?php
                 $navCategories = [
@@ -111,7 +146,7 @@
               ?>
               @foreach($navItems as $slug => $item)
               <li class="nav-item">
-                <a class="nav-link @if($item['active'])active @endif" href="{{ $item['url'] }}">{{ $item['label'] }}</a>
+                <a class="nav-link @if($item['active'])active @endif" href="{{ $item['url'] }}"> {{ __($item['label']) }}</a>
               </li>
               @endforeach
             </ul>
