@@ -1,5 +1,9 @@
 <?php
+
+
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -52,7 +56,7 @@ Route::middleware(['guest'])->prefix('auth')->group(function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
     Route::get('/register', [RegisterController::class, 'index'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register');
-    Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('reset-password');
+    #Route::get('/forgot-password', [ForgotPasswordController::class, 'index'])->name('reset-password');
 });
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -77,3 +81,5 @@ Route::post('language/{locale}', function (Request $request, $locale) {
     }
     return response()->json(['locale' => $locale]);
 });
+
+require __DIR__.'/auth.php';
