@@ -16,7 +16,7 @@
                     @if($url != '')
                     <li>
                         <a href="{{ $url }}" target="_blank" rel="nofollow">
-                            {!! file_get_contents(asset('assets/img/icons/'. $platform .'.svg')) !!}
+                          <img style=" width: 20px; height: 20px;" src="{{ asset('assets/img/icons/'. $platform .'.svg') }}" />
                         </a>
                     </li>
                     @endif
